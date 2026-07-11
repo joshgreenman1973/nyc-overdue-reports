@@ -121,9 +121,14 @@
     <select id="agency" aria-label="Filter by agency"><option value="">All agencies</option></select>
     <select id="sort" aria-label="Sort order">
       <option value="late">Most overdue first</option>
+      <option value="stale">Longest since last filing</option>
+      <option value="recent">Most recently filed</option>
+      <option value="freq">Most frequently required</option>
+      <option value="filings_desc">Most filings on record</option>
+      <option value="filings_asc">Fewest filings on record</option>
+      <option value="notice">City late notice first</option>
       <option value="agency">Agency A&ndash;Z</option>
       <option value="name">Report name A&ndash;Z</option>
-      <option value="recent">Most recently filed</option>
     </select>
   </div>
   <p class="count-line" id="countline"></p>
@@ -172,6 +177,29 @@ const STATUS = {
 };
 const PAGE = 250;
 let DATA = null, filtered = [], shown = 0, statusFilter = "red";
+
+// Frequency string -> approximate interval in days (for "most frequently required").
+const FREQ_UNIT = { day: 1, week: 7, month: 30.44, year: 365.25 };
+function freqDays(f) {
+  const m = /Every (\d+) (Day|Week|Month|Year)s?/i.exec(f || "");
+  return m ? +m[1] * FREQ_UNIT[m[2].toLowerCase()] : Infinity; // blank/"Once"/unparseable sort last
+}
+const cmp = (x, y) => x < y ? -1 : x > y ? 1 : 0;
+const SORTS = {
+  // most days overdue first; never-filed (null days_late) fall to the end, oldest last-filed breaking ties
+  late:        (a, b) => (b.days_late || 0) - (a.days_late || 0) || cmp(a.last_filed || "9999", b.last_filed || "9999"),
+  // longest since the last time anything was filed; never-filed (no date) sort last
+  stale:       (a, b) => cmp(a.last_filed || "9999", b.last_filed || "9999") || (b.days_late || 0) - (a.days_late || 0),
+  recent:      (a, b) => cmp(b.last_filed || "", a.last_filed || ""),
+  // reports due most often first (daily/monthly before every-5-years), most overdue breaking ties
+  freq:        (a, b) => freqDays(a.frequency) - freqDays(b.frequency) || (b.days_late || 0) - (a.days_late || 0),
+  filings_desc:(a, b) => (b.filings || 0) - (a.filings || 0) || (b.days_late || 0) - (a.days_late || 0),
+  filings_asc: (a, b) => (a.filings || 0) - (b.filings || 0) || (b.days_late || 0) - (a.days_late || 0),
+  // reports with an active city late notice first, most recent notice on top
+  notice:      (a, b) => (b.late_notice_active ? 1 : 0) - (a.late_notice_active ? 1 : 0) || cmp(b.late_notice || "", a.late_notice || ""),
+  agency:      (a, b) => a.agency.localeCompare(b.agency) || a.name.localeCompare(b.name),
+  name:        (a, b) => a.name.localeCompare(b.name),
+};
 
 const $ = id => document.getElementById(id);
 const fmt = d => d ? new Date(d + "T12:00:00").toLocaleDateString("en-US", {year:"numeric", month:"short", day:"numeric"}) : null;
@@ -224,12 +252,7 @@ function refresh() {
     (!q || (r.name + " " + r.agency + " " + (r.description||"") + " " + (r.local_law||"") + " " + (r.charter_code||"")).toLowerCase().includes(q))
   );
   const s = $("sort").value;
-  filtered.sort((a,b) =>
-    s === "agency" ? a.agency.localeCompare(b.agency) || a.name.localeCompare(b.name) :
-    s === "name"   ? a.name.localeCompare(b.name) :
-    s === "recent" ? (b.last_filed||"").localeCompare(a.last_filed||"") :
-    (b.days_late||0) - (a.days_late||0) || (a.last_filed||"").localeCompare(b.last_filed||"") // "late": most overdue, then never-filed oldest
-  );
+  filtered.sort(SORTS[s] || SORTS.late);
   document.querySelectorAll(".tile").forEach(el => el.classList.toggle("active", el.dataset.key === statusFilter));
   shown = 0;
   $("rows").innerHTML = "";
