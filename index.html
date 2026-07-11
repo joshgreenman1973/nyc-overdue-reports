@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overdue: the reports New York City owes itself</title>
+<meta name="description" content="Every report New York City agencies are legally required to publish — and whether they actually did.">
+<link rel="stylesheet" href="https://use.typekit.net/qqk2vto.css">
+<style>
+  @font-face {
+    font-family: "GascogneTS";
+    src: url("fonts/GascogneTS-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-display: swap;
+  }
+  :root {
+    --black: #050507;
+    --white: #ffffff;
+    --cloud: #dddddd;
+    --chartreuse: #dde44c;
+    --orange: #ff7c53;
+    --charcoal: #707175;
+    --charcoal-20: #e2e3e2;
+    --indigo: #394882;
+    --green: #57aa4a;
+    --red: #d2232a;
+    --red-mid: #ed5236;
+    --sans: "halyard-text", "Halyard Text", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --sans-disp: "halyard-display", "Halyard Display", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --serif: "GascogneTS", Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); color: var(--black); background: var(--white); line-height: 1.5; }
+  a { color: var(--indigo); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  header.masthead { border-bottom: 3px solid var(--black); padding: 36px 0 26px; }
+  .kicker { font-family: var(--sans-disp); font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+  h1 { font-family: var(--sans-disp); font-weight: 800; font-size: clamp(34px, 5.5vw, 58px); line-height: 1.04; margin: 10px 0 14px; letter-spacing: -0.01em; }
+  .dek { font-size: 19px; max-width: 780px; color: #222; }
+  .dek b { font-weight: 600; }
+  .updated { margin-top: 12px; font-size: 13px; color: var(--charcoal); }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 30px 0 8px; }
+  .tile { border: 2px solid var(--black); padding: 16px 16px 12px; background: var(--white); cursor: pointer; text-align: left; font-family: var(--sans); transition: box-shadow .12s; }
+  .tile:hover { box-shadow: 4px 4px 0 var(--chartreuse); }
+  .tile.active { box-shadow: 5px 5px 0 var(--black); outline: 2px solid var(--black); }
+  .tile .num { font-family: var(--serif); font-weight: 300; font-size: clamp(30px, 4vw, 46px); line-height: 1; display: block; }
+  .tile .lab { font-family: var(--sans-disp); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; margin-top: 8px; display: block; }
+  .tile.red .num { color: var(--red); }
+  .tile.mid .num { color: var(--red-mid); }
+  .tile.orange .num { color: #d95b2f; }
+  .tile.green .num { color: var(--green); }
+  .tile.gray .num { color: var(--charcoal); }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 22px 0 6px; padding: 14px 0; border-top: 1px solid var(--cloud); border-bottom: 1px solid var(--cloud); }
+  .controls input[type=search] { flex: 1 1 240px; font: 15px var(--sans); padding: 9px 12px; border: 1.5px solid var(--black); }
+  .controls select { font: 14px var(--sans); padding: 9px 8px; border: 1.5px solid var(--black); background: var(--white); max-width: 340px; }
+  .count-line { font-size: 14px; color: var(--charcoal); margin: 10px 0 4px; }
+  .count-line b { color: var(--black); }
+
+  .rows { border-top: 2px solid var(--black); }
+  .row { display: grid; grid-template-columns: 132px 1fr 190px; gap: 14px; padding: 13px 4px; border-bottom: 1px solid var(--cloud); align-items: start; }
+  .row:hover { background: #fafaf5; }
+  .badge { font-family: var(--sans-disp); font-weight: 800; font-size: 11.5px; letter-spacing: .07em; text-transform: uppercase; padding: 4px 8px; display: inline-block; color: var(--white); text-align: center; }
+  .badge.never { background: var(--red); }
+  .badge.overdue { background: var(--red-mid); }
+  .badge.current { background: var(--green); }
+  .badge.completed, .badge.waived, .badge.unscheduled { background: var(--charcoal); }
+  .notice-flag { display: inline-block; margin-top: 6px; font-family: var(--sans-disp); font-weight: 700; font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: #b34a15; border: 1.5px solid #d95b2f; padding: 2px 6px; }
+  .r-name { font-family: var(--sans-disp); font-weight: 700; font-size: 16.5px; line-height: 1.25; }
+  .r-agency { font-size: 13.5px; color: var(--indigo); margin-top: 2px; font-weight: 600; }
+  .r-desc { font-size: 13.5px; color: #444; margin-top: 5px; max-width: 640px; }
+  .r-cite { font-size: 12.5px; color: var(--charcoal); margin-top: 5px; }
+  .r-meta { font-size: 13px; text-align: right; }
+  .r-meta .late-days { font-family: var(--serif); font-size: 26px; color: var(--red-mid); display: block; line-height: 1.1; }
+  .r-meta .never-word { font-family: var(--serif); font-size: 22px; color: var(--red); display: block; line-height: 1.15; }
+  .r-meta small { color: var(--charcoal); display: block; margin-top: 3px; }
+  .r-meta a { font-size: 12.5px; }
+  .more-btn { display: block; margin: 22px auto; font: 700 14px var(--sans-disp); text-transform: uppercase; letter-spacing: .06em; background: var(--black); color: var(--white); border: none; padding: 12px 26px; cursor: pointer; }
+  .more-btn:hover { box-shadow: 4px 4px 0 var(--chartreuse); }
+
+  section.prose { margin: 52px 0; max-width: 800px; }
+  section.prose h2 { font-family: var(--sans-disp); font-weight: 800; font-size: 26px; margin-bottom: 14px; border-top: 3px solid var(--black); padding-top: 14px; }
+  section.prose h3 { font-family: var(--sans-disp); font-weight: 700; font-size: 18px; margin: 20px 0 6px; }
+  section.prose p, section.prose li { font-size: 15.5px; color: #1d1d1f; margin-bottom: 10px; }
+  section.prose ul { padding-left: 22px; }
+
+  footer { border-top: 3px solid var(--black); margin-top: 40px; padding: 26px 0 60px; font-size: 13.5px; color: #333; }
+  footer p { margin-bottom: 8px; max-width: 800px; }
+  .ai-caution { position: relative; display: inline-block; margin-top: 14px; }
+  .ai-caution button { font: 600 13px var(--sans); color: #fff; background: #7a2018; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .ai-caution button:hover { background: #6a1813; }
+  .ai-caution .popover { display: none; position: absolute; bottom: calc(100% + 10px); left: 0; width: min(440px, 86vw); background: #1f2a44; color: #eef1f7; padding: 16px 18px; border-radius: 8px; font-size: 13px; line-height: 1.5; box-shadow: 0 8px 28px rgba(0,0,0,0.28); z-index: 50; }
+  .ai-caution.open .popover { display: block; }
+  .ai-caution .popover:after { content: ""; position: absolute; top: 100%; left: 22px; border: 8px solid transparent; border-top-color: #1f2a44; }
+
+  @media (max-width: 700px) {
+    .row { grid-template-columns: 1fr; gap: 6px; }
+    .r-meta { text-align: left; }
+    .r-meta .late-days, .r-meta .never-word { display: inline; font-size: 20px; margin-right: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="kicker">A public accountability tracker</div>
+    <h1>Overdue: the reports New York City owes itself</h1>
+    <p class="dek">City law requires agencies to publish more than <b>2,100 recurring reports</b> — on everything from roadway safety to workforce equity — and to file each one with the Department of Records and Information Services. Many never arrive. This tracker cross-references the city&rsquo;s official list of required reports with what agencies have actually filed.</p>
+    <p class="updated" id="updated"></p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="tiles" id="tiles"></div>
+
+  <div class="controls">
+    <input type="search" id="q" placeholder="Search reports, agencies, laws&hellip;" aria-label="Search reports">
+    <select id="agency" aria-label="Filter by agency"><option value="">All agencies</option></select>
+    <select id="sort" aria-label="Sort order">
+      <option value="late">Most overdue first</option>
+      <option value="agency">Agency A&ndash;Z</option>
+      <option value="name">Report name A&ndash;Z</option>
+      <option value="recent">Most recently filed</option>
+    </select>
+  </div>
+  <p class="count-line" id="countline"></p>
+  <div class="rows" id="rows"></div>
+  <button class="more-btn" id="more" hidden>Show more</button>
+
+  <section class="prose">
+    <h2>How complete is this list?</h2>
+    <p>The requirements list is the city&rsquo;s own: the Department of Records and Information Services (DORIS) is required by section 1133 of the City Charter (added by Local Law 29 of 2019) to maintain a list of every report agencies must produce under local law, executive order or mayoral directive. Three honest limits:</p>
+    <ul>
+      <li><b>Reports mandated by state or federal law are largely absent.</b> The Charter only asks agencies to file those &ldquo;where practicable.&rdquo; Just a handful of the 2,100-plus entries cite state or federal authority, so city reports owed under state law are systematically undercounted here.</li>
+      <li><b>Absence from the portal does not always mean a report doesn&rsquo;t exist.</b> When the system launched in 2019, Gotham Gazette found that some reports listed as never received were in fact published on agencies&rsquo; own websites &mdash; they just were never filed with DORIS as the law requires. A red badge means the city&rsquo;s own recordkeeping system has no copy; the underlying work may or may not exist somewhere else.</li>
+      <li><b>Requirements can be waived.</b> The Report and Advisory Board Review Commission can waive reporting requirements; waivers appear in this data only as free-text notes, which we parse and label. A waived report ceases to be required.</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <h2>How this works</h2>
+    <p><b>Sources.</b> Two datasets published by DORIS on NYC Open Data, both refreshed monthly: <a href="https://data.cityofnewyork.us/d/9azj-tmjp">Government Publication &ndash; Required Reports</a> (the list of legally mandated reports: agency, report name, frequency, authorizing law, last published date) and the <a href="https://data.cityofnewyork.us/d/xip9-pe9k">Government Publications Listing</a> (metadata for all 78,000-plus documents filed with DORIS under Charter section 1133).</p>
+    <p><b>The join.</b> DORIS tags each filed document with the required report it satisfies, using the same controlled name vocabulary as the requirements list. We join the two on agency plus report name after trimming whitespace; 923 of 925 distinct report names in the filings match exactly.</p>
+    <p><b>Status logic.</b> For each requirement we take the most recent filing date from either dataset (future-dated entries, a known data-quality issue, are ignored), add the report&rsquo;s stated frequency (&ldquo;Every 1 Year&rdquo; = 365 days, &ldquo;Every 3 Months&rdquo; = 91 days, and so on) and compare to today. Past due = <b>overdue</b>. No filing ever recorded = <b>never filed</b>. One-time or superseded requirements whose description says &ldquo;Completed&rdquo; = completed; descriptions noting a waiver = waived; requirements with no stated frequency and at least one filing = no schedule.</p>
+    <p><b>The city&rsquo;s own late notices.</b> When a report is overdue, the Charter requires DORIS to post a &ldquo;Delinquent Report Notice&rdquo; in its place. We flag every requirement whose most recent late notice is newer than its most recent filing. Note the two signals can disagree: DORIS knows the actual statutory due dates (say, an annual report due each January 31), while our math anchors to the last filing date plus the stated interval. Where they disagree, we show both.</p>
+    <p><b>Limits.</b> This reflects DORIS&rsquo;s recordkeeping as of the date shown above. Where the same requirement appears in multiple versions (the underlying law changed), we show the current version and note the count. See the <a href="https://github.com/joshgreenman1973">repository</a> for the full methodology and build code.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Sources:</b> Government Publication &ndash; Required Reports and Government Publications Listing, Department of Records and Information Services via NYC Open Data. Accessed on the date shown at top. Authorizing law: New York City Charter section 1133.</p>
+    <p>Computed statuses are estimates based on stated frequencies and recorded filing dates; the official record is the <a href="https://a860-gpp.nyc.gov/mandated_reports/public_list?agency=All&locale=en">DORIS Government Publications Portal</a>.</p>
+    <span class="ai-caution" id="aiCaution">
+      <button type="button" aria-expanded="false">And please read this AI caution.</button>
+      <span class="popover">Everything substantive &mdash; the concept, the status definitions and the editorial judgment &mdash; was handled by the author (a human). The coding and data assembly were primarily in the hands of Anthropic&rsquo;s Claude and Claude Code, under close direction. Quality controls included building only from the city&rsquo;s own two official datasets, linking every report to its filings page on the DORIS portal, cross-checking computed overdue statuses against DORIS&rsquo;s own delinquent report notices and stating the limits of the underlying list in the methodology above. Nevertheless, the risks of using AI remain, and we&rsquo;d be grateful to learn of any red flags, errors or omissions you notice.</span>
+    </span>
+  </div>
+</footer>
+
+<script>
+const STATUS = {
+  never:       { label: "Never filed",  cls: "never" },
+  overdue:     { label: "Overdue",      cls: "overdue" },
+  current:     { label: "Up to date",   cls: "current" },
+  completed:   { label: "Completed",    cls: "completed" },
+  waived:      { label: "Waived",       cls: "waived" },
+  unscheduled: { label: "No schedule",  cls: "unscheduled" },
+};
+const PAGE = 250;
+let DATA = null, filtered = [], shown = 0, statusFilter = "red";
+
+const $ = id => document.getElementById(id);
+const fmt = d => d ? new Date(d + "T12:00:00").toLocaleDateString("en-US", {year:"numeric", month:"short", day:"numeric"}) : null;
+const esc = s => (s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+
+fetch("data.json").then(r => r.json()).then(d => {
+  DATA = d;
+  const m = d.meta, c = m.status_counts;
+  $("updated").textContent = "Data as of " + fmt(m.built) + " · " + m.requirements.toLocaleString() +
+    " requirements tracked · refreshed from NYC Open Data";
+  const notices = d.reports.filter(r => r.late_notice_active).length;
+  const tiles = [
+    { key: "red",     n: (c.never||0)+(c.overdue||0), lab: "Missing or overdue", cls: "red" },
+    { key: "never",   n: c.never||0,     lab: "Never filed",        cls: "red" },
+    { key: "overdue", n: c.overdue||0,   lab: "Overdue",            cls: "mid" },
+    { key: "notice",  n: notices,        lab: "City late notices",  cls: "orange" },
+    { key: "current", n: c.current||0,   lab: "Up to date",         cls: "green" },
+    { key: "done",    n: (c.completed||0)+(c.waived||0)+(c.unscheduled||0), lab: "Completed, waived or unscheduled", cls: "gray" },
+  ];
+  $("tiles").innerHTML = tiles.map(t =>
+    `<button class="tile ${t.cls}" data-key="${t.key}"><span class="num">${t.n.toLocaleString()}</span><span class="lab">${t.lab}</span></button>`
+  ).join("");
+  document.querySelectorAll(".tile").forEach(el => el.addEventListener("click", () => {
+    statusFilter = (statusFilter === el.dataset.key) ? "all" : el.dataset.key;
+    refresh();
+  }));
+  const agencies = [...new Set(d.reports.map(r => r.agency))].sort();
+  $("agency").innerHTML += agencies.map(a => `<option value="${esc(a)}">${esc(a)}</option>`).join("");
+  ["q","agency","sort"].forEach(id => $(id).addEventListener("input", refresh));
+  $("more").addEventListener("click", () => render(true));
+  refresh();
+});
+
+function matchesStatus(r) {
+  switch (statusFilter) {
+    case "all": return true;
+    case "red": return r.status === "never" || r.status === "overdue";
+    case "notice": return r.late_notice_active;
+    case "done": return ["completed","waived","unscheduled"].includes(r.status);
+    default: return r.status === statusFilter;
+  }
+}
+
+function refresh() {
+  const q = $("q").value.trim().toLowerCase();
+  const ag = $("agency").value;
+  filtered = DATA.reports.filter(r =>
+    matchesStatus(r) &&
+    (!ag || r.agency === ag) &&
+    (!q || (r.name + " " + r.agency + " " + (r.description||"") + " " + (r.local_law||"") + " " + (r.charter_code||"")).toLowerCase().includes(q))
+  );
+  const s = $("sort").value;
+  filtered.sort((a,b) =>
+    s === "agency" ? a.agency.localeCompare(b.agency) || a.name.localeCompare(b.name) :
+    s === "name"   ? a.name.localeCompare(b.name) :
+    s === "recent" ? (b.last_filed||"").localeCompare(a.last_filed||"") :
+    (b.days_late||0) - (a.days_late||0) || (a.last_filed||"").localeCompare(b.last_filed||"") // "late": most overdue, then never-filed oldest
+  );
+  document.querySelectorAll(".tile").forEach(el => el.classList.toggle("active", el.dataset.key === statusFilter));
+  shown = 0;
+  $("rows").innerHTML = "";
+  render(false);
+}
+
+function render(more) {
+  const chunk = filtered.slice(shown, shown + PAGE);
+  shown += chunk.length;
+  $("countline").innerHTML = `Showing <b>${Math.min(shown, filtered.length).toLocaleString()}</b> of <b>${filtered.length.toLocaleString()}</b> requirements` +
+    (statusFilter !== "all" ? " · <a href='#' id='clearf'>clear filter</a>" : "");
+  const cl = document.getElementById("clearf");
+  if (cl) cl.addEventListener("click", e => { e.preventDefault(); statusFilter = "all"; refresh(); });
+  $("rows").insertAdjacentHTML("beforeend", chunk.map(rowHTML).join(""));
+  $("more").hidden = shown >= filtered.length;
+}
+
+function rowHTML(r) {
+  const st = STATUS[r.status];
+  const cites = [r.local_law, r.charter_code].filter(Boolean).join(" · ");
+  let meta = "";
+  if (r.status === "never") {
+    meta = `<span class="never-word">Never filed</span><small>required ${esc((r.frequency||"").toLowerCase()) || "&mdash;"}</small>`;
+  } else if (r.status === "overdue") {
+    const yrs = r.days_late >= 365 ? (r.days_late/365).toFixed(1) + " years late" : r.days_late + " days late";
+    meta = `<span class="late-days">${yrs}</span><small>last filed ${fmt(r.last_filed)} · due ${fmt(r.due)}</small>`;
+  } else if (r.last_filed) {
+    meta = `<small><b>Last filed ${fmt(r.last_filed)}</b>${r.due ? " · next due " + fmt(r.due) : ""}</small>`;
+  }
+  if (r.filings) meta += `<small>${r.filings.toLocaleString()} filing${r.filings === 1 ? "" : "s"} on record</small>`;
+  if (r.link) meta += `<a href="${esc(r.link)}" target="_blank" rel="noopener">See filings &#8599;</a>`;
+  const notice = r.late_notice_active ? `<span class="notice-flag">City late notice ${fmt(r.late_notice)}</span>` : "";
+  return `<div class="row">
+    <div><span class="badge ${st.cls}">${st.label}</span>${notice}</div>
+    <div>
+      <div class="r-name">${esc(r.name)}</div>
+      <div class="r-agency">${esc(r.agency)}</div>
+      ${r.description ? `<div class="r-desc">${esc(r.description)}</div>` : ""}
+      ${cites ? `<div class="r-cite">${esc(cites)}${r.frequency ? " · " + esc(r.frequency) : ""}</div>` : (r.frequency ? `<div class="r-cite">${esc(r.frequency)}</div>` : "")}
+    </div>
+    <div class="r-meta">${meta}</div>
+  </div>`;
+}
+
+const ac = $("aiCaution");
+ac.querySelector("button").addEventListener("click", () => {
+  ac.classList.toggle("open");
+  ac.querySelector("button").setAttribute("aria-expanded", ac.classList.contains("open"));
+});
+document.addEventListener("click", e => { if (!ac.contains(e.target)) ac.classList.remove("open"); });
+</script>
+</body>
+</html>
