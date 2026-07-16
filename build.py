@@ -246,6 +246,13 @@ def main():
         elif m_f:
             superseded_reason = "Folded into the " + tidy(m_f.group(1))
 
+        # A reading of the authorizing law overrides the description text: if the
+        # statute was repealed or expired, the requirement is not owed no matter
+        # what DORIS's list still says.
+        review = reviews.get(f"{agency}||{name}")
+        if review and review.get("verdict") == "lapsed":
+            superseded_reason = review.get("cite")
+
         # A closed- or open-ended era annotation on the row we are actually
         # scoring: the requirement may have lapsed at the end of that window, or
         # the agency may simply have stopped filing. DORIS does not say which, so
@@ -318,7 +325,7 @@ def main():
             "versions": len(rows),
             "superseded_reason": superseded_reason,
             "era_note": era_note,
-            "law_review": reviews.get(f"{agency}||{name}"),
+            "law_review": review,
         })
 
     counts = {}

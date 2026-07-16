@@ -7,7 +7,6 @@
   },
   "_reviewed": "2026-07-16",
   "_method": "Current section text read on American Legal Publishing (codelibrary.amlegal.com), the official NYC code publisher, supplemented where noted by City Clerk-certified enacted local-law texts from intro.nyc. Note that amlegal returns HTTP 403 to automated fetching; some sections were read via the BetaNYC nyc-charter mirror, whose index lagged (built 2026-05-19) and missed at least one pending-amendment editor's note. Where the mirror was the only source, confidence is noted accordingly.",
-
   "reviews": [
     {
       "key": "Civilian Complaint Review Board (CCRB)||Administrative Prosecution Unit Reports",
@@ -296,6 +295,276 @@
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-224862",
       "quote": "The department shall, within eight months of the effective date of this section, complete an analysis of the combined sewer outfall system and its relationship to floatables, including medical debris ... This analysis shall include, but not be limited to, identifying, evaluating and providing: ... 6. A quarterly report about the status of this debris, as evidenced by the city-wide floatables study",
       "note": "Same provision as the row above. Additionally, DORIS attributes this row to the 'CSO Order on Consent' — a state DEC consent order, not a local-law reporting mandate. Any ongoing quarterly CSO obligation would arise from that order, which is outside what the code text can resolve."
+    },
+    {
+      "key": "Police Department (NYPD)||Use of Force Encounter Report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 14-159(b) (L.L. 2016/086)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-129716",
+      "quote": "Use of force encounter report. The department shall post on its website within 30 days of the beginning of each quarter a report of the number of use of force incidents for the prior quarter disaggregated by basis for encounter.",
+      "note": "Open-ended ('each quarter'); the only editor's note points to unconsolidated provisions, not a repeal."
+    },
+    {
+      "key": "Children's Services, Administration for (ACS)||Quarterly Detention Incident Reports/Close-To-Home Incident Report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-906(a) (rewritten by L.L. 2024/112, eff. 1/1/2025)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-205403",
+      "quote": "By January 15, 2025, and no later than 60 days after the end of each quarter thereafter, ACS shall submit a report related to incidents occurring in juvenile justice facilities to the speaker of the council and make such report available on ACS's website.",
+      "note": "DORIS's law fields (LL 14/2010, LL 44/2013) are STALE. Far from lapsing, the Council refreshed and expanded this mandate in Nov 2024 with a new Jan 15, 2025 baseline."
+    },
+    {
+      "key": "Housing Preservation and Development, Department of (HPD)||List of properties with 20 or more units identified by block and lot number with identity of mortgagee plaintiffs for which notice has been provided under 27-2109.1(a)",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 27-2109.1(a)(3) (L.L. 2012/004)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-61219",
+      "quote": "The department shall maintain on its website a list of all properties with twenty or more units, identified by block and lot number ... Such list shall be updated at a minimum on the first business day of each month.",
+      "note": "LL 4/2012's final section is an effective-date clause only — no sunset. Verified against the City Clerk-certified enacted text."
+    },
+    {
+      "key": "Correction, Department of (DOC)||Report of the Board of Correction",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Charter § 626(d) (Am. L.L. 2019/133; L.L. 2025/105, eff. 11/11/2025)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-2217",
+      "quote": "The board, annually and at such other times as it may determine, shall submit to the mayor, the council, and the commissioner reports, findings and recommendations in regard to the matters within its jurisdiction.",
+      "note": "DORIS supplies no citation and its 'LL 102/1977' attribution is not the operative source; the duty is Charter-based and was amended as recently as Nov 2025."
+    },
+    {
+      "key": "Small Business Services, Department of (SBS)||Annual Report on the Locally Based Enterprises Program",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 6-108.1(h)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-2795",
+      "quote": "The mayor shall submit an annual report to the council, on or before April first of each year, concerning the administration of the program established pursuant to this section.",
+      "note": "Intact. The adjacent § 6-108.2 carries an explicit '[Repealed]' tag from L.L. 2023/067, showing the code marks repeals clearly and left this one alone."
+    },
+    {
+      "key": "Small Business Services, Department of (SBS)||Report on Activities of the Division of Economic and Financial Opportunity",
+      "verdict": "lapsed",
+      "confidence": "high",
+      "cite": "NYC Charter § 1304(e)(5) — REPEALED by L.L. 2023/069, eff. 6/28/2023",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-1400",
+      "quote": "5 reserved; ... (Am. L.L. 2020/058, 6/29/2020, eff. 8/28/2020; Am. L.L. 2023/069, 5/29/2023, eff. 6/28/2023)",
+      "note": "Repealed as one of the reports selected for waiver by the Report and Advisory Board Review Commission. The paragraph now reads only 'reserved'. DORIS's listed authorities (LL 12/2006, LL 129/2005, LL 61/1991) are superseded on this point."
+    },
+    {
+      "key": "Contract Services, Mayor's Office of (MOCS)||Anticipated Contracting Actions for the Upcoming Fiscal Year",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Charter § 312(a)(8)(b) (L.L. 2011/063; Am. L.L. 2024/085, eff. 10/1/2024)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-5331",
+      "quote": "The mayor shall, no later than July 31st of each year, produce and publish on the mayor's office of contract services website a plan and schedule for each agency detailing the anticipated contracting actions of each such agency for the upcoming fiscal year.",
+      "note": "Affirmatively expanded by LL 2024/085 — decisive evidence it is live."
+    },
+    {
+      "key": "Human Resources Administration (HRA)||Cash assistance application and caseload engagement status reports for individuals aged 16 to 20",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-134(b) (L.L. 2012/051)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-37199",
+      "quote": "Cash assistance caseload engagement status report for heads of household aged sixteen through twenty-four. Beginning no later than April 1, 2013, and no later than the first day of each subsequent month, the department shall post on its website an updated report regarding the engagement status of heads of household between and including the ages of sixteen and twenty-four",
+      "note": "DORIS's title is wrong: subdivision (b) covers ages 16 through 24, not 16 to 20. The '16 to 20' range belongs to subdivision (c), a separate and also in-force semiannual duty. LL 51/2012 has no sunset."
+    },
+    {
+      "key": "Children's Services, Administration for (ACS)||Annual Detention Incident Reports/Close-to-Home Annual",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-906(b) (Am. L.L. 2024/112, eff. 1/1/2025)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-205403",
+      "quote": "Annual incident reports. 1. Within 60 days after the end of each fiscal year, ACS shall post a report on its website containing the following data: (a) the number of allegations made during the fiscal year that a child in a detention or placement facility was a neglected or abused child;",
+      "note": "DORIS's '(a) and (b)' is imprecise for an annual report: (a) is the quarterly duty, (b) the annual, (c) a monthly OC-spray report. Expanded, not narrowed, by LL 2024/112."
+    },
+    {
+      "key": "Children's Services, Administration for (ACS)||Demographic Data on Population Placements and Transfers",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-905 (Am. L.L. 2024/112, eff. 1/1/2025)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-205403",
+      "quote": "By January 15, 2025, and no later than 90 days after the end of each quarter thereafter, ACS shall submit a report about the demographics of juveniles in the juvenile justice system to the speaker of the council and post such report on ACS's website.",
+      "note": "Two DORIS errors: the section has lettered subdivisions a-g, not paragraphs (1)/(2); and the FREQUENCY is wrong — this is quarterly, not annual, since LL 2024/112 re-based it to Jan 2025. The annual compilation duty sits in § 21-903."
+    },
+    {
+      "key": "Police Department (NYPD)||Patrol Guide Procedures Quarterly Report",
+      "verdict": "lapsed",
+      "confidence": "high",
+      "cite": "Former NYC Admin. Code § 14-150(a)(2) — REPEALED by L.L. 2016/129, eff. 1/29/2017",
+      "url": "https://intro.nyc/local-laws/2016-129",
+      "quote": "Section 1. Paragraph 2 of subdivision a of section 14-150 of the administrative code of the city of New York is REPEALED.",
+      "note": "Verified independently against the current § 14-150: the words 'patrol guide' appear nowhere in the section, (a)(2) is now the crime status report, and the credit line includes 'Am. L.L. 2016/129, eff. 1/29/2017'. The surviving quarterly duty at (f)(1) covers training materials only. The replacement, § 14-164, is a 24-hour website-update duty with no reporting cadence. The 2021 filing postdates the repeal. DORIS's law fields never record the 2016 repealer."
+    },
+    {
+      "key": "Children's Services, Administration for (ACS)||Annual Reports Regarding Youth Aging Out of Foster Care",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-902.1(b) (Am. L.L. 2025/116, eff. 8/13/2025)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-139754",
+      "quote": "Annual reports regarding youth and foster care. Beginning no later than April 30, 2026 for the calendar year 2025 and annually thereafter, ACS shall furnish to the speaker of the council and the public advocate, and post on ACS's website a report regarding youth in foster care.",
+      "note": "Amended Aug 2025, re-basing the due date to April 30, 2026 and adding data points. Note the BetaNYC mirror conflates § 21-902.1 with § 21-902; amlegal is reliable here."
+    },
+    {
+      "key": "End Domestic and Gender-Based Violence, Mayor's Office to (ENDGBV)||Domestic Violence Fatality Review Committee Report on Domestic Violence Initiatives, Indicators and Factors",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 3-181 (L.L. 2019/038; Am. L.L. 2021/109)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-201830",
+      "quote": "On June 1, 2019, and no later than January 31 annually thereafter, the office shall submit to the mayor and speaker of the council and post on its website an annual report regarding certain domestic violence initiatives, indicators, and factors.",
+      "note": "DORIS's citation (§ 3-171(b)(1)) is WRONG — § 3-171 is 'Pay and employment equity data' and has nothing to do with domestic violence. The provision enacted by LL 38/2019 is § 3-181."
+    },
+    {
+      "key": "Records and Information Services, Department of (DORIS)||Bulletin on activities (Library Notes)",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Charter § 3004(3)(a) (Am. L.L. 2025/041, eff. 8/9/2025)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-6582",
+      "quote": "provide for the distribution of publications of the city, where such authority is not vested in another city agency, and issue at regular intervals, no less than quarterly, a bulletin describing its facilities and resources;",
+      "note": "Standing duty at a fixed minimum cadence. Section amended Aug 2025 — demonstrably live."
+    },
+    {
+      "key": "Environmental Protection, Department of (DEP)||Commissioner report on all waivers, findings, and renewals relating to clean heating oil and biodiesel",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 24-168.1(d)(1) (Am. L.L. 2023/067, eff. 6/28/2023)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-205309",
+      "quote": "No later than September 1, 2013, and no later than September 1 of every year thereafter, the commissioner shall submit a report to the mayor and the speaker of the council, which shall include: (i) all waivers, findings and renewals of such findings issued pursuant to this section during the immediately preceding calendar year;",
+      "note": "Neighboring §§ 24-170 to 24-172 carry '[Repealed]' tags from L.L. 2015/038; this section is intact and was amended in 2023. The duty may be satisfied via the Mayor's Management Report under (d)(2), a plausible explanation for the sparse DORIS record."
+    },
+    {
+      "key": "Children's Services, Administration for (ACS)||Accountability Review Panel/Annual Child Fatality Review Report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-915 (L.L. 2018/019)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-38445",
+      "quote": "No later than June 1, 2018, and no later than 18 months after the end of each calendar year thereafter, ACS shall publish and make available on its website a report on the findings and recommendations of its child fatality reviews during the previous calendar year.",
+      "note": "ACS has in fact continued publishing these — its 2022 and 2023 Systemic Child Fatality Review reports both cite § 21-915 — so the report exists but is not reaching DORIS. The title's 'Accountability Review Panel' element is a DORIS conflation; § 21-915 governs only the child fatality review report."
+    },
+    {
+      "key": "Correction, Department of (DOC)||Post-Arraignment Bail Holds",
+      "verdict": "in_force",
+      "confidence": "medium",
+      "cite": "NYC Admin. Code § 9-149(d) (L.L. 2017/124)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-5664",
+      "quote": "Beginning July 1, 2018, the department or its designee shall submit to the council an annual report regarding the implementation of subdivisions a and b of this section.",
+      "note": "DORIS's attribution to 'LL 85 of 2015 (Int. 706)' is WRONG — that law is codified at § 9-140 and covers jail visitation, not bail. The duty comes from LL 124/2017. Medium confidence: LL 124/2017 carries a CONDITIONAL sunset that only triggers once the correction commissioner notifies the Council; no such notice was found, and amlegal still prints subd. (d) unmarked, with a state amendment dated 8/8/2022 postdating the trigger date."
+    },
+    {
+      "key": "Immigrant Affairs, Mayor's Office of (MOIA)||Report on Agency Policies on Identifying Information",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 23-1205(a) (L.L. 2017/245)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-129545",
+      "quote": "No later than July 31, 2018, and every two years thereafter by July 31, each city agency shall provide a report regarding the collection, retention, and disclosure of identifying information by such agency and any contractors or subcontractors utilized by such agency.",
+      "note": "No sunset. Companion § 23-1204(c) reinforces the ongoing cycle. Attribution caveat: the duty runs to 'each city agency', not MOIA specifically."
+    },
+    {
+      "key": "Operations, Mayor's Office of (OPS)||Report of the Algorithms Management and Policy Officer",
+      "verdict": "lapsed",
+      "confidence": "high",
+      "cite": "Executive Order 50 of 2019 § 4 — REVOKED by Executive Order 3 of 2022 § 10 (Jan. 19, 2022)",
+      "url": "https://www.nyc.gov/assets/home/downloads/pdf/executive-orders/2022/eo-3.pdf",
+      "quote": "Executive Order No. 50, dated November 19, 2019, are hereby REVOKED. § 11. This Order shall take effect immediately.",
+      "note": "Rests on a mayoral executive order, not a statute. EO 3 of 2022 both discontinued the office (§ 4: 'The Algorithms Management and Policy Officer ... shall be discontinued') and revoked EO 50 outright (§ 10). No local law preserves the report. The residual function went to OTI, so DORIS's attribution to the Mayor's Office of Operations is wrong even as to the successor. Same executive order that dissolved DOITT, MODA and MOIP."
+    },
+    {
+      "key": "Food Policy Director, Mayor's Office of the (MOFP)||City Food Metrics Report (Not the same as the food security portion attributed to Office of Food Policy?)",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 3-120(a) (L.L. 2011/052; Am. L.L. 2021/059) and NYC Charter § 20(j)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-432",
+      "quote": "No later than September first, two thousand twelve, and no later than every September first thereafter, the office of long-term planning and sustainability shall prepare and submit to the mayor and the speaker of the city council a report regarding the production, processing, distribution and consumption of food in and for the city of New York during the previous fiscal year.",
+      "note": "LL 2021/059 EXPANDED the report (adding SNAP gap, food-insecurity and dietary-outcome measures) rather than winding it down. Attribution caveat: § 3-120 places the duty on the office of long-term planning and sustainability, though MOFP publishes it in practice."
+    },
+    {
+      "key": "Records and Information Services, Department of (DORIS)||Municipal Archives Annual Report (contained within the Archival Review Board annual report)",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Charter § 3005",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-6585",
+      "quote": "Such board shall render annually to the mayor a report reviewing the archival processing of any city papers during the year for which the report has been written.",
+      "note": "L.L. 2026/077 (eff. 8/7/2026) renames the body and RE-ENACTS the annual report as a new subdivision e ('No later than December 31, 2026, and annually by December 31 thereafter'). The report survives the reorganization — the law repeals § 3009, not this duty."
+    },
+    {
+      "key": "Fire Department, New York City (FDNY)||Report on Recruitment Efforts",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 15-130(c) (L.L. 2015/049)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-25727",
+      "quote": "The following information shall be provided on March 1 of each year for the preceding calendar year: 1. The department's expenditures on recruiting candidates for the open-competitive firefighter civil service examination and promotion to firefighter civil service examination;",
+      "note": "DORIS's 'Section 130(3)' is a mangle — there is no subdivision 3; the recruitment content is subdivision (c), paragraphs 1-3. LL 2015/049's final section is an effective-date clause only."
+    },
+    {
+      "key": "Police Department (NYPD)||Firearms Discharge Report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 14-150(b) (Am. L.L. 2024/029, eff. 7/1/2024)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-25085",
+      "quote": "The New York city police department shall submit to the city council and post on its website on an annual basis a firearms discharge report, which shall include, but need not be limited to, the following information for the prior year:",
+      "note": "Subdivision (b) intact and recurring; section maintained through 2024. (Contrast subdivision (a)(2) in the same section, whose patrol guide duty WAS repealed in 2016.)"
+    },
+    {
+      "key": "Fire Department, New York City (FDNY)||Report on materials developed with Department of Education on fire safety and prevention",
+      "verdict": "lapsed",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 15-133(b) — DEEMED REPEALED June 12, 2023 by L.L. 2018/116 § 2",
+      "url": "https://intro.nyc/local-laws/2018-116",
+      "quote": "Subdivision b of section 15-133 of the administrative code of the city of New York, as added by section one of this local law, is deemed repealed 5 years after it becomes law.",
+      "note": "THE SUBTLE ONE. amlegal's running text still prints subdivision (b) as if live ('Beginning January 31, 2019 and annually thereafter') because the self-repealer lives in the law's unconsolidated provisions, not the code page — only the editor's note pointing to Appendix A hints at it. The clerk certifies the law was 'returned unsigned by the Mayor on June 12, 2018', so (b) died June 12, 2023. DORIS's era note ('Reports from Nov 2020 to Jan 2023') is accurate: the Jan 2023 filing was the last one ever owed. Subdivision (a), the duty to run the education program, survives."
+    },
+    {
+      "key": "City Planning, Department of (DCP)||Zoning and Planning Report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Charter § 192(f)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-809",
+      "quote": "Not later than the thirty-first day of December, nineteen hundred ninety-two and every four years thereafter, the commission shall file with the mayor, the council, the public advocate, the borough presidents, and community boards, a zoning and planning report.",
+      "note": "Four-year cycle confirmed against the text, running from Dec 31 1992 — so due Dec 31 of 2020, 2024, 2028. L.L. 2023/069 does not touch § 192."
+    },
+    {
+      "key": "Contract Services, Mayor's Office of (MOCS)||Small Purchases Quarterly Report",
+      "verdict": "lapsed",
+      "confidence": "high",
+      "cite": "NYC Charter § 314(b) — REPEALED by L.L. 2023/069, eff. 6/28/2023",
+      "url": "https://intro.nyc/local-laws/2023-69",
+      "quote": "Section 1. Subdivision b of section 314 of the New York city charter is REPEALED.",
+      "note": "The law's title names the target: 'to repeal subdivision b of section 314 of such charter, relating to a report on small purchases'. Charter § 314 today consists of subdivision (a) only and contains no reporting requirement. Another Report and Advisory Board Review Commission waiver."
+    },
+    {
+      "key": "Homeless Services, Department of (DHS)||Homeless Diversion Teams",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-124.1",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-216720",
+      "quote": "Beginning on October 1, 1995 and on the first day of each succeeding calendar quarter thereafter, the commissioner shall report to the speaker of the city council in writing on the homeless diversion teams including, but not limited to, the following information aggregated on a quarterly and fiscal year annualized basis;",
+      "note": "No amendment note at all — the text stands as originally enacted. L.L. 2023/069 does not touch it. Attribution caveat: the duty falls on the Social Services commissioner and the screening happens at HRA centers, so this is properly a DSS/HRA obligation."
+    },
+    {
+      "key": "Citywide Administrative Services, Department of (DCAS)||Report on NYC Facilities Energy System Assessment of Certain Clean On-site Power Generation Technologies",
+      "verdict": "lapsed",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 4-207 — REPEALED by L.L. 2023/069, eff. 6/28/2023",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-1470",
+      "quote": "§ 4-207 Assessment of certain clean on-site power generation technologies. [Repealed] (Am. L.L. 2022/060, 5/15/2022, eff. 5/15/2022; Repealed L.L. 2023/069, 5/29/2023, eff. 6/28/2023)",
+      "note": "Was the single most overdue entry in the tracker at 3,118 days — the first row a reader saw. The section is marked [Repealed] outright. Found not by the era annotation (this row has none) but by sweeping every provision L.L. 2023/069 repealed against the requirements list."
+    },
+    {
+      "key": "Transportation, Department of (DOT)||Traffic Calming Study",
+      "verdict": "lapsed",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 19-179 — REPEALED by L.L. 2023/069, eff. 6/28/2023",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-32040",
+      "quote": "§ 19-179 Traffic calming study. [Repealed] (Repealed L.L. 2023/069, 5/29/2023, eff. 6/28/2023)",
+      "note": "Carried a red 'never filed' badge for a requirement that no longer exists."
+    },
+    {
+      "key": "Health and Mental Hygiene, Department of (DOHMH)||Electronic Death Registration System Evaluation",
+      "verdict": "lapsed",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 17-196(i) — REPEALED by L.L. 2023/069, eff. 6/28/2023",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-27622",
+      "quote": "h. Reserved. i. Reserved. ... (Am. L.L. 2023/068, 5/29/2023, eff. 6/28/2023; Am. L.L. 2023/069, 5/29/2023, eff. 6/28/2023)",
+      "note": "Subdivision (i) now reads only 'Reserved'. The rest of § 17-196 (the electronic death registration system itself) survives; only the reporting subsection died. Carried a red 'never filed' badge."
     }
   ]
 }
