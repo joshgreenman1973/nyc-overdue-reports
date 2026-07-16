@@ -56,6 +56,31 @@ def norm(s):
     return re.sub(r"\s+", " ", (s or "").strip())
 
 
+def fold(s):
+    """Case- and punctuation-insensitive key.
+
+    DORIS enters the same requirement under inconsistent casing and hyphenation
+    ("Report on freelance law" vs "Report on Freelance Law"; "bio-diesel" vs
+    "biodiesel"). Exact-string keys split those into two requirements, which
+    strands the older row with a stale filing date and reports it overdue.
+    """
+    return re.sub(r"[^a-z0-9]", "", norm(s).lower())
+
+
+def agency_key(a):
+    """Canonical agency key: the agency name minus its trailing acronym.
+
+    The two datasets disagree on the acronym for the same agency — the
+    requirements list says "Health and Hospitals Corporation (H+H)" while
+    filings arrive under "(HHC)" — so a literal string join silently drops
+    those filings and reports the requirement staler than it is. The long name
+    is the stable part. Verified against both datasets (July 2026): this key
+    merges exactly one pair, H+H/HHC, and collides no genuinely distinct
+    agencies. Keying on the acronym instead would NOT merge that pair.
+    """
+    return fold(re.sub(r"\s*\([^)]*\)\s*$", "", norm(a)))
+
+
 def parse_date(s):
     """Socrata floating timestamp -> date, or None."""
     if not s:
@@ -87,8 +112,49 @@ def freq_days(freq):
 
 # Era annotations look like "(Required report from Jan 2020 - July 2020)" —
 # a closed date range means the row describes a superseded version of the
-# requirement, not the current one.
-ERA_CLOSED_RE = re.compile(r"\(required report from .+? (?:-|to|through) .+?\)", re.I)
+# requirement, not the current one. The source is inconsistent about singular
+# vs plural and "from" vs "up to", so match the family, not one phrasing.
+ERA_CLOSED_RE = re.compile(
+    r"\((?:required\s+)?reports?\s+(?:from|up to)\s+[^)]*?(?:-|–|to|through)\s+[^)]*\)", re.I
+)
+# Same family, but open-ended ("(Report from May 2018)", "(Reports from Sept 2020)").
+# Ambiguous on its face: it may mean the requirement began then, or that DORIS's
+# holdings stop there. Never used to change status — only to flag the row.
+ERA_ANY_RE = re.compile(r"\((?:required\s+)?reports?\s+(?:from|up to)\s+[^)]*\)", re.I)
+
+# ---- Requirements that are no longer owed by this agency ----------------------
+# Each is stated in DORIS's own free-text description; none of it is structured.
+# We reclassify rather than drop, so the row stays auditable on the site.
+
+# "(This report is now filed by Technology and Innovation, Office of (OTI)"
+# Executive Order 3 of 2022 folded DOITT, MODA and MOIP into OTI; their rows
+# linger in the list and accrue days late against agencies that no longer exist.
+TRANSFER_RE = re.compile(r"now\s+(?:filed|submitted|published)\s+by\s+(.+?)(?:\)|\.|$)", re.I)
+# "(Sunsetted by operation of LL 36/2021)" / "until Local Law is deemed repealed"
+SUNSET_RE = re.compile(r"sunsetted by[^.)]*|deemed repealed[^.)]*|repealed by[^.)]*", re.I)
+# "(See Annual Zero Waste Report)" — folded into another report. Requires the
+# word "report" in the pointer so bare cross-references like "(see details)"
+# do not match.
+FOLDED_RE = re.compile(r"\(see\s+([^)]*report[^)]*)\)", re.I)
+
+
+def tidy(s):
+    """Clean a fragment lifted out of DORIS free text.
+
+    Several descriptions open a parenthetical and never close it — e.g.
+    "(This report is now filed by Technology and Innovation, Office of (OTI" —
+    so a captured fragment can carry an unbalanced "(". Re-balance it and drop
+    trailing punctuation.
+    """
+    s = norm(s).rstrip(" .;,")
+    depth = s.count("(") - s.count(")")
+    return s + ")" * depth if depth > 0 else s
+
+
+def sentence(s):
+    """Uppercase the first character only; str.capitalize() would lowercase the
+    rest and turn "LL 51/2023" into "ll 51/2023"."""
+    return s[:1].upper() + s[1:] if s else s
 
 
 def main():
@@ -107,7 +173,7 @@ def main():
         rname = norm(p.get("required_report_name"))
         if not rname or rname == "Other Publication":
             continue
-        key = (norm(p.get("agency")), rname)
+        key = (agency_key(p.get("agency")), fold(rname))
         d = clamp(parse_date(p.get("date_published")))
         if norm(p.get("report_type")) == "Delinquent Report Notice":
             # DORIS's own overdue signal (Charter sec. 1133(d)) — track separately,
@@ -125,11 +191,13 @@ def main():
     # multiple rows when the requirement changed over time ("era" rows). ----
     groups = {}
     for r in reqs:
-        key = (norm(r.get("agency")), norm(r.get("name")))
+        key = (agency_key(r.get("agency")), fold(r.get("name")))
         groups.setdefault(key, []).append(r)
 
     out = []
-    for (agency, name), rows in sorted(groups.items()):
+    for _, rows in sorted(
+        groups.items(), key=lambda kv: (norm(kv[1][0].get("agency")), norm(kv[1][0].get("name")))
+    ):
         # Pick the row describing the CURRENT requirement: prefer rows whose
         # description is not a closed era range; among those, latest last_published_date.
         def is_era(r):
@@ -138,6 +206,9 @@ def main():
         current = [r for r in rows if not is_era(r)] or rows
         current.sort(key=lambda r: parse_date(r.get("last_published_date")) or date.min, reverse=True)
         r = current[0]
+        # Display the chosen row's own agency/name spelling: it is the current-era
+        # row, so its casing is the one DORIS is using now.
+        agency, name = norm(r.get("agency")), norm(r.get("name"))
 
         desc = r.get("description") or ""
         completed = "(completed" in desc.lower()
@@ -145,9 +216,33 @@ def main():
         freq = norm(r.get("frequency"))
         interval = freq_days(freq)
 
-        key = (agency, name)
+        # ---- Is this row still owed by this agency at all? ----
+        superseded_reason = None
+        m_t = TRANSFER_RE.search(desc)
+        m_s = SUNSET_RE.search(desc)
+        m_f = FOLDED_RE.search(desc)
+        if m_t:
+            superseded_reason = "Now filed by " + tidy(m_t.group(1))
+        elif m_s:
+            superseded_reason = sentence(tidy(m_s.group(0)))
+        elif m_f:
+            superseded_reason = "Folded into the " + tidy(m_f.group(1))
+
+        # A closed- or open-ended era annotation on the row we are actually
+        # scoring: the requirement may have lapsed at the end of that window, or
+        # the agency may simply have stopped filing. DORIS does not say which, so
+        # we keep the computed status and surface the ambiguity instead.
+        m_era = ERA_ANY_RE.search(desc)
+        era_note = norm(m_era.group(0)).strip("()") if m_era else None
+
+        # Merge filings across every spelling of this requirement (the group can
+        # hold several rows whose casing differs).
+        key = (agency_key(agency), fold(name))
         f = filings.get(key, {"count": 0, "last": None, "last_title": None})
-        spine_last = clamp(parse_date(r.get("last_published_date")))
+        spine_last = max(
+            (d for d in (clamp(parse_date(x.get("last_published_date"))) for x in rows) if d),
+            default=None,
+        )
         # Best available "last filed": max of the spine's own field and the
         # filings mirror (they can disagree; take the more recent).
         last = max((d for d in (spine_last, f["last"]) if d), default=None)
@@ -164,6 +259,11 @@ def main():
             status = "waived"
         elif completed:
             status = "completed"
+        elif superseded_reason:
+            # Still shown, still linked, but not counted against the agency: the
+            # requirement moved to a successor agency, was repealed, or was
+            # folded into another report.
+            status = "superseded"
         elif freq == "Once":
             status = "completed" if last else "never"
         elif interval is None:  # blank/unparseable frequency: no schedule to compute
@@ -198,6 +298,8 @@ def main():
             "late_notice_active": bool(active_notice),
             "link": link,
             "versions": len(rows),
+            "superseded_reason": superseded_reason,
+            "era_note": era_note,
         })
 
     counts = {}
@@ -226,6 +328,14 @@ def main():
     only_notice = sum(1 for x in out if x["late_notice_active"] and x["status"] not in ("overdue", "never"))
     print(f"Active DORIS late notices agreeing with computed overdue/never: {both}")
     print(f"Active DORIS late notices where we computed something else: {only_notice}")
+    sup = [x for x in out if x["status"] == "superseded"]
+    print(f"Superseded (reassigned/repealed/folded), withheld from overdue: {len(sup)}")
+    for x in sup:
+        print(f"    {x['agency']} | {x['name']} — {x['superseded_reason']}")
+    caveat = sum(1 for x in out if x["era_note"] and x["status"] == "overdue")
+    print(f"Overdue rows carrying an era caveat: {caveat}")
+    # Requirements merged across casing/punctuation variants of the same name.
+    print(f"Requirement rows collapsed into fewer requirements: {len(reqs) - len(out)}")
 
 
 if __name__ == "__main__":
