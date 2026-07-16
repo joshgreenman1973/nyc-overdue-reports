@@ -51,11 +51,35 @@ The list retains rows for reports that are no longer owed by the agency named. L
 
 This is detection from unstructured text, not a structured field, and it is therefore conservative: it catches only what DORIS wrote down. Requirements that lapsed without a note remain counted as overdue.
 
-### Ambiguous date ranges (flagged, not resolved)
+### Ambiguous date ranges — and what reading the laws showed
 
-59 overdue requirements carry an annotation like "(Required Reports from Jan 2020 to Nov 2020)" or "(Reports up to Jul 2020)". This is genuinely ambiguous in the source: it may mean the requirement lapsed at the end of that window, or that the agency simply stopped filing a report it still owes. DORIS does not distinguish the two, and the underlying local laws would have to be read individually to tell.
+59 overdue requirements carry an annotation like "(Required Reports from Jan 2020 to Nov 2020)" or "(Reports up to Jul 2020)". On its face this is ambiguous: it may mean the requirement lapsed at the end of that window, or that the agency simply stopped filing a report it still owes. DORIS does not distinguish the two, and nothing in either dataset answers it — only the authorizing statute does.
 
-We do not guess. These keep their computed `overdue` status and are counted in the overdue total, but each carries an `era_note` and is flagged on the site with the source's own wording and an explicit statement that the requirement may have lapsed. This is the single largest known source of possible overstatement in the overdue count, and it is concentrated in the long tail: many of the entries above 1,900 days late carry one of these notes.
+So for the 32 most overdue of these (every entry at 1,900+ days late), we read the current text of the cited section. The results are recorded in `law_review.json`, one entry per requirement, each with the citation, a verbatim quote of the operative language and a link:
+
+- **30 of 32 are still in force.** **None had lapsed.** The statutes use open-ended recurring language — "and 30 days after every quarter thereafter" (§ 14-171(b)), "and annually thereafter" (§ 21-914(d)), "each succeeding calendar quarter" (§ 21-312(e)) — in which the only dated language is a *start* date. Several have been affirmatively maintained since: DOC's visitation report was re-enacted by LL 2025/044 effective January 2026; the nightlife inspections report was amended effective January 2024; Charter § 815(i) survived four amendments through 2024.
+- **2 could not be resolved** — both DEP rows resting on Admin. Code § 24-504.2(a)(6), where the quarterly report is item 6 in an enumerated list of what a *one-time* analysis "shall include" rather than a freestanding perpetual duty. The section is not repealed (and the code flags repeals explicitly — adjacent § 24-504.1 is marked "[Repealed]"), so it did not silently lapse; the text simply does not say whether the cadence survives the study. Two independent reviewers reached the same conclusion. These keep the caveat.
+
+**The conclusion generalizes: the era annotation describes DORIS's holdings, not the scope of the legal duty.** A weaker data-only test pointed the same way but was not decisive — in 15 of 26 testable cases the annotation's end date matched the last filing DORIS holds, consistent with "these are the reports we have," but in 11 it extended past the last filing, so it is not purely a holdings description. The statutes settle what the correlation could not.
+
+Requirements with a reading attached carry a `law_review` object and are labeled "Still required" on the site with the section text shown. The 27 era-flagged entries below 1,900 days late have not been read yet and keep the caveat. `build.py` warns at build time if a review's key no longer matches any requirement, so the file cannot rot silently when DORIS renames a row.
+
+#### Errors found in DORIS's own metadata
+
+Reading the laws surfaced four bad citations in the requirements list itself. None changes a status, but each would mislead anyone trying to follow the tracker back to the source:
+
+| Requirement | DORIS says | Actually |
+|---|---|---|
+| MOCJ, nightlife inspections | Admin. Code § 9-309 | § 9-308 — § 9-309 is an unrelated district attorney reporting section (LL 2021/161). LL 220/2019 as enacted said "§ 9-307," but that was already taken by LL 2019/192, so the codifier moved it. |
+| NYPD, Special Victims Division audits | Admin. Code § 14-177(c) | § 14-178(c) — § 14-177 is "Harassment and sexual assault survivor sensitivity training" (LL 2018/189) and has no subsection (c). |
+| EDC, quarterly expenditure reports | Charter § 119 | § 110 — Charter Chapter 6 runs § 100–111; there is no § 119. |
+| DOF, report on revocations | Admin. Code Title 11, Chapter 140 | § 11-140. |
+
+Two labels are also wrong: HRA's "reports for individuals aged 16 to 25" covers ages 16 **through 24**, and its § 21-134(b) duty is **monthly**, not the semiannual cadence DORIS records (the semiannual duty is subdivision (c)). DEP's "Maintenance, Costs and Expenses" is really § 24-357, "Report to comptroller of expenses and liabilities."
+
+#### One case where the report exists but DORIS has no copy
+
+CCRB's Administrative Prosecution Unit reports (2,267 days late, the most overdue entry in the tracker) rest not on a statute but on paragraph 18 of the 2012 CCRB–NYPD memorandum of understanding, which requires quarterly status reports to the NYPD. The MOU is still presented as operative, and **CCRB has published APU quarterly reports through 2026 Q1** — they are simply not filed with DORIS. This is limitation 2 above in its purest form: the red badge is accurate about the city's recordkeeping and misleading about the underlying work. Note also that the duty runs to the NYPD rather than to the public, and paragraph 29 lets either party terminate on written notice, so it is legally weaker than the statutory duties around it.
 4. **City late notices**: when a report is overdue, Charter section 1133(d) requires DORIS to post a "Delinquent Report Notice" in its place. We flag a requirement when its most recent late notice is newer than its most recent filing.
 
 ### Why our status and the city's late notices can disagree

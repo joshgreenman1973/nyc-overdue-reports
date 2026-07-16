@@ -157,6 +157,23 @@ def sentence(s):
     return s[:1].upper() + s[1:] if s else s
 
 
+def load_law_review():
+    """Manual readings of the authorizing law for requirements whose DORIS
+    description carries an ambiguous era annotation.
+
+    The annotation ("Required reports from Jan 2020 to Nov 2020") does not say
+    whether the requirement lapsed or the agency simply stopped filing. Only the
+    statute answers that, and the statute is not in either dataset — so these
+    readings are hand-recorded, each with the section text quoted. Keyed by
+    "agency||name" as they appear in the output.
+    """
+    p = HERE / "law_review.json"
+    if not p.exists():
+        return {}
+    doc = json.loads(p.read_text())
+    return {r["key"]: r for r in doc.get("reviews", [])}
+
+
 def main():
     print("Fetching requirements list (9azj-tmjp)...")
     reqs = fetch_all(REQ_URL)
@@ -165,6 +182,7 @@ def main():
         PUB_URL,
         select="agency,required_report_name,date_published,report_type,title",
     )
+    reviews = load_law_review()
 
     # ---- Index filings by (agency, required_report_name) ----
     filings = {}          # key -> {count, last, last_title}
@@ -300,6 +318,7 @@ def main():
             "versions": len(rows),
             "superseded_reason": superseded_reason,
             "era_note": era_note,
+            "law_review": reviews.get(f"{agency}||{name}"),
         })
 
     counts = {}
@@ -333,7 +352,17 @@ def main():
     for x in sup:
         print(f"    {x['agency']} | {x['name']} — {x['superseded_reason']}")
     caveat = sum(1 for x in out if x["era_note"] and x["status"] == "overdue")
-    print(f"Overdue rows carrying an era caveat: {caveat}")
+    reviewed = sum(1 for x in out if x["law_review"])
+    print(f"Overdue rows carrying an era caveat: {caveat} ({caveat - sum(1 for x in out if x['era_note'] and x['status'] == 'overdue' and x['law_review'])} still unreviewed)")
+    print(f"Requirements with a manual reading of the authorizing law: {reviewed}")
+    # A review keyed to a requirement that no longer exists is silent rot: DORIS
+    # renames rows, and a stale key would just stop attaching with no warning.
+    keys = {f"{x['agency']}||{x['name']}" for x in out}
+    orphaned = [k for k in reviews if k not in keys]
+    if orphaned:
+        print(f"WARNING: {len(orphaned)} law_review entries match no requirement (renamed upstream?):")
+        for k in orphaned:
+            print(f"    {k}")
     # Requirements merged across casing/punctuation variants of the same name.
     print(f"Requirement rows collapsed into fewer requirements: {len(reqs) - len(out)}")
 

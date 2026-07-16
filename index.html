@@ -69,6 +69,9 @@
   .badge.completed, .badge.waived, .badge.unscheduled, .badge.superseded { background: var(--charcoal); }
   .notice-flag { display: inline-block; margin-top: 6px; font-family: var(--sans-disp); font-weight: 700; font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: #b34a15; border: 1.5px solid #d95b2f; padding: 2px 6px; }
   .caveat-flag { display: inline-block; margin-top: 6px; font-family: var(--sans-disp); font-weight: 700; font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--indigo); border: 1.5px dashed var(--indigo); padding: 2px 6px; cursor: help; }
+  .verified-flag { display: inline-block; margin-top: 6px; font-family: var(--sans-disp); font-weight: 700; font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: #2f6b26; border: 1.5px solid var(--green); padding: 2px 6px; cursor: help; }
+  .r-verified { font-size: 12.5px; color: #444; margin-top: 5px; max-width: 640px; border-left: 2px solid var(--green); padding-left: 8px; }
+  .r-verified-note { color: var(--charcoal); font-size: 12px; }
   .r-super { font-size: 13px; margin-top: 5px; color: var(--indigo); font-weight: 600; }
   .r-caveat { font-size: 12.5px; color: #444; margin-top: 5px; max-width: 640px; border-left: 2px solid var(--indigo); padding-left: 8px; }
   .r-name { font-family: var(--sans-disp); font-weight: 700; font-size: 16.5px; line-height: 1.25; }
@@ -146,7 +149,7 @@
       <li><b>Absence from the portal does not always mean a report doesn&rsquo;t exist.</b> When the system launched in 2019, Gotham Gazette found that some reports listed as never received were in fact published on agencies&rsquo; own websites &mdash; they just were never filed with DORIS as the law requires. A red badge means the city&rsquo;s own recordkeeping system has no copy; the underlying work may or may not exist somewhere else.</li>
       <li><b>Requirements can be waived.</b> The Report and Advisory Board Review Commission can waive reporting requirements; waivers appear in this data only as free-text notes, which we parse and label. A waived report ceases to be required.</li>
       <li><b>Some entries are no longer owed by the agency named.</b> The list still carries reports whose requirement was repealed, folded into another report, or moved to a successor agency &mdash; Executive Order 3 of 2022 dissolved DOITT, the Mayor&rsquo;s Office of Data Analytics and the Mayor&rsquo;s Office of Information Privacy into the Office of Technology and Innovation, but their rows remain. Left alone, those rows accrue &ldquo;days late&rdquo; against agencies that no longer exist, and double-count reports their successor is filing on time. Where the city&rsquo;s own description says so, we label them <b>superseded</b> and withhold them from the overdue count. They remain listed and searchable.</li>
-      <li><b>Some date ranges are ambiguous.</b> Dozens of entries carry a note like &ldquo;Required Reports from Jan 2020 to Nov 2020.&rdquo; That can mean the requirement lapsed at the end of that window, or that the agency simply stopped filing a report it still owes. The data does not distinguish the two. We continue to count these as overdue and flag each one rather than guess.</li>
+      <li><b>Some date ranges look ambiguous &mdash; so we read the laws.</b> Dozens of entries carry a note like &ldquo;Required Reports from Jan 2020 to Nov 2020,&rdquo; which could mean the requirement lapsed at the end of that window, or merely that the agency stopped filing a report it still owes. For the 32 most overdue of these, we went to the authorizing statute. <b>Thirty are still in force; none had lapsed.</b> Those rows now carry the section text and a link to the law. Two &mdash; both resting on the same combined-sewer provision &mdash; could not be resolved from the text and keep the caveat, as do the 27 shorter-overdue entries we have not yet read. The lesson generalizes: these notes describe what DORIS received, not what the law requires.</li>
     </ul>
   </section>
 
@@ -166,7 +169,7 @@
     <p>Computed statuses are estimates based on stated frequencies and recorded filing dates; the official record is the <a href="https://a860-gpp.nyc.gov/mandated_reports/public_list?agency=All&locale=en">DORIS Government Publications Portal</a>.</p>
     <span class="ai-caution" id="aiCaution">
       <button type="button" aria-expanded="false">And please read this AI caution.</button>
-      <span class="popover">Everything substantive &mdash; the concept, the status definitions and the editorial judgment &mdash; was handled by the author (a human). The coding and data assembly were primarily in the hands of Anthropic&rsquo;s Claude and Claude Code, under close direction. Quality controls included building only from the city&rsquo;s own two official datasets, linking every report to its filings page on the DORIS portal, cross-checking computed overdue statuses against DORIS&rsquo;s own delinquent report notices and stating the limits of the underlying list in the methodology above. Nevertheless, the risks of using AI remain, and we&rsquo;d be grateful to learn of any red flags, errors or omissions you notice.</span>
+      <span class="popover">Everything substantive &mdash; the concept, the status definitions and the editorial judgment &mdash; was handled by the author (a human). The coding and data assembly were primarily in the hands of Anthropic&rsquo;s Claude and Claude Code, under close direction. Quality controls included building only from the city&rsquo;s own two official datasets, linking every report to its filings page on the DORIS portal, cross-checking computed overdue statuses against DORIS&rsquo;s own delinquent report notices and stating the limits of the underlying list in the methodology above. For the 32 most overdue entries whose city-supplied description carried an ambiguous date range, we did not rely on the data at all: we read the current text of the authorizing statute and recorded the citation and a verbatim quote for each, which is shown on the row. Thirty proved still in force, none had lapsed, and two could not be resolved from the text and say so. Nevertheless, the risks of using AI remain, and we&rsquo;d be grateful to learn of any red flags, errors or omissions you notice.</span>
     </span>
   </div>
 </footer>
@@ -295,13 +298,22 @@ function rowHTML(r) {
   if (r.link) meta += `<a href="${esc(r.link)}" target="_blank" rel="noopener">See filings &#8599;</a>`;
   const notice = r.late_notice_active ? `<span class="notice-flag">City late notice ${fmt(r.late_notice)}</span>` : "";
   // The source annotation is ambiguous: the requirement may have ended with that
-  // window, or the agency may have simply stopped filing. We keep the computed
-  // status and show the ambiguity rather than resolve it silently.
+  // window, or the agency may have simply stopped filing. Where we have read the
+  // authorizing law, show what it says; otherwise show the ambiguity rather than
+  // resolve it silently.
+  const lr = r.law_review;
   const showCaveat = r.era_note && (r.status === "overdue" || r.status === "never");
-  const caveatFlag = showCaveat ? `<span class="caveat-flag" title="Counted as overdue, but the requirement may have lapsed — see note.">Dates ambiguous</span>` : "";
-  const caveat = showCaveat
-    ? `<div class="r-caveat"><b>Note:</b> the city&rsquo;s description of this requirement says &ldquo;${esc(r.era_note)}.&rdquo; That may mean the requirement ended then &mdash; or that the agency simply stopped filing. DORIS does not say which, so we still count it as ${r.status === "never" ? "never filed" : "overdue"}.</div>`
-    : "";
+  let caveatFlag = "", caveat = "";
+  if (lr && lr.verdict === "in_force") {
+    caveatFlag = `<span class="verified-flag" title="We read the authorizing law: the requirement is still in force.">Law checked</span>`;
+    caveat = `<div class="r-verified"><b>Still required.</b> We read the authorizing law rather than rely on the city&rsquo;s date note. ${esc(lr.cite)} provides: &ldquo;${esc(lr.quote)}&rdquo; ` +
+      `<a href="${esc(lr.url)}" target="_blank" rel="noopener">Read the law &#8599;</a>${lr.note ? `<br><span class="r-verified-note">${esc(lr.note)}</span>` : ""}</div>`;
+  } else if (showCaveat) {
+    caveatFlag = `<span class="caveat-flag" title="Counted as overdue, but the requirement may have lapsed — see note.">Dates ambiguous</span>`;
+    caveat = `<div class="r-caveat"><b>Note:</b> the city&rsquo;s description of this requirement says &ldquo;${esc(r.era_note)}.&rdquo; That may mean the requirement ended then &mdash; or that the agency simply stopped filing. DORIS does not say which, so we still count it as ${r.status === "never" ? "never filed" : "overdue"}.` +
+      (lr && lr.verdict === "uncertain" ? ` We read ${esc(lr.cite)} and it does not settle the question: ${esc(lr.note)} <a href="${esc(lr.url)}" target="_blank" rel="noopener">Read the law &#8599;</a>` : "") +
+      `</div>`;
+  }
   const superNote = r.superseded_reason ? `<div class="r-super">${esc(r.superseded_reason)} &mdash; no longer owed by this agency, so it is not counted as overdue.</div>` : "";
   return `<div class="row">
     <div><span class="badge ${st.cls}">${st.label}</span>${notice}${caveatFlag}</div>

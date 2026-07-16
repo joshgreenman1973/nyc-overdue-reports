@@ -1,0 +1,301 @@
+{
+  "_comment": "Manual legal review of requirements whose DORIS description carries an ambiguous era annotation (e.g. 'Required reports from Jan 2020 to Nov 2020'). The annotation can mean the requirement lapsed at the end of that window, or that DORIS simply stopped receiving a report still owed. The only way to tell is to read the authorizing law. Each entry below records a reading of the CURRENT text of the cited section. Keyed by 'AGENCY||REPORT NAME' exactly as they appear in data.json. build.py attaches these to the matching record as `law_review`; entries that no longer match any requirement are reported at build time so this file cannot rot silently.",
+  "_verdicts": {
+    "in_force": "The cited section still mandates the recurring report. The computed overdue status stands, and the era annotation reflects DORIS's filing history rather than a legal endpoint.",
+    "lapsed": "The section was repealed or the duty expired by its own terms. Overdue would be wrong.",
+    "uncertain": "The law text does not resolve it. Keep the caveat."
+  },
+  "_reviewed": "2026-07-16",
+  "_method": "Current section text read on American Legal Publishing (codelibrary.amlegal.com), the official NYC code publisher, supplemented where noted by City Clerk-certified enacted local-law texts from intro.nyc. Note that amlegal returns HTTP 403 to automated fetching; some sections were read via the BetaNYC nyc-charter mirror, whose index lagged (built 2026-05-19) and missed at least one pending-amendment editor's note. Where the mirror was the only source, confidence is noted accordingly.",
+
+  "reviews": [
+    {
+      "key": "Civilian Complaint Review Board (CCRB)||Administrative Prosecution Unit Reports",
+      "verdict": "in_force",
+      "confidence": "medium",
+      "cite": "CCRB-NYPD Administrative Prosecution Unit MOU (agreed 4/2/2012), para. 18",
+      "url": "https://www.nyc.gov/assets/ccrb/downloads/pdf/about_pdf/apu_mou.pdf",
+      "quote": "CCRB shall provide to the NYPD status reports on the prosecution of its cases, quarterly and as otherwise requested by the NYPD.",
+      "note": "Not a statute. Paragraph 18 is an open-ended quarterly duty, but para. 29 lets either party terminate on written notice, and a termination would not necessarily be public — hence medium confidence. CCRB still presents the 2012 MOU as operative and is publishing APU quarterly reports through 2026 Q1, so the report exists; it is simply not being filed with DORIS."
+    },
+    {
+      "key": "Environmental Protection, Department of (DEP)||Maintenance, Costs and Expenses",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 24-357",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-44773",
+      "quote": "The commissioner of environmental protection shall in every calendar month file in the office of the comptroller an account of any expenses made by the commissioner, or under the commissioner's authority, and of all liabilities incurred by the commissioner during the preceding month and an abstract of each such account shall be published in the City Record.",
+      "note": "Recurring monthly duty, no sunset. DORIS's label ('Maintenance, Costs and Expenses') does not match the statute's actual heading, 'Report to comptroller of expenses and liabilities'; the filing goes to the comptroller with an abstract in the City Record."
+    },
+    {
+      "key": "Fire Department, New York City (FDNY)||Report on Response Times to Fire and Medical Emergencies/Citywide Performance Indicators",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 15-129(c) (L.L. 2013/119; Am. L.L. 2017/179)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-25711",
+      "quote": "The department shall submit a monthly and yearly report to the council and to the mayor that it shall also post on its website, detailing the citywide response times for each category required herein, disaggregated by borough, community district, and division.",
+      "note": "The Ariel Russo Emergency 9-1-1 Response Time Reporting Act. Amended by L.L. 2017/179 to expand the reporting categories — strengthening the duty, not ending it."
+    },
+    {
+      "key": "Homeless Services, Department of (DHS)||Shelter Repair Scorecard/Report of Deficiencies in Any Homeless Shelters for Adults",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-312(e) (L.L. 1999/019)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-216719",
+      "quote": "The commissioner shall submit to the speaker of the council quarterly reports summarizing the health, sanitation, safety and fire protection-related deficiencies identified in any inspection of a shelter for adults conducted by any state agency... The first such report shall be due thirty business days following the calendar quarter ending September thirtieth, nineteen hundred and ninety-eight and all subsequent reports shall be due thirty business days following the last day of each succeeding calendar quarter.",
+      "note": "'Each succeeding calendar quarter' is explicitly open-ended; the 1998 date is the start of the obligation, not its end."
+    },
+    {
+      "key": "Police Department (NYPD)||Index crime clearance report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 14-171(b) (L.L. 2018/042)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-25420",
+      "quote": "No later than 30 days after the quarter ending December 31, 2017 and 30 days after every quarter thereafter, the department shall publish on the department's website a report for the prior quarter, which shall include a report for each borough, of the clearance rate for the following crimes:",
+      "note": "'Every quarter thereafter' is open-ended; the only dated language is a start date. No sunset."
+    },
+    {
+      "key": "Children's Services, Administration for (ACS)||Report on Preventive Services Surveys",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-914(d) (L.L. 2018/017)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-129401",
+      "quote": "No later than six months following the first administration of the survey required pursuant to this section, and annually thereafter, ACS shall submit to the speaker of the council and post on its website aggregated data from such surveys and any steps ACS had taken in response to the information provided in such surveys.",
+      "note": "Subsection (d) unrepealed; 'annually thereafter' is open-ended."
+    },
+    {
+      "key": "Children's Services, Administration for (ACS)||Report on Preventive Services",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-917(b) (L.L. 2018/011)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-129404",
+      "quote": "Beginning with the calendar quarter ending March 31, 2018, and for every calendar quarter thereafter, ACS shall furnish to the speaker of the council and post on ACS' website, no later than 30 days after the end of each such calendar quarter, a report regarding preventive services rendered during such calendar quarter",
+      "note": "No sunset. The 'Jul 2018 - Jan 2021' note describes DORIS's receipts, not the duty."
+    },
+    {
+      "key": "Management and Budget, Office of (OMB)||Expense Budget Administration",
+      "verdict": "in_force",
+      "confidence": "medium",
+      "cite": "NYC Charter § 106(b)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-6744",
+      "quote": "Each agency shall administer all monies appropriated or available for programs and purposes of the agency in accordance with quarterly allotment plans proposed by the agency and approved or modified by the mayor.",
+      "note": "Recurring quarterly duty, no sunset. Medium confidence: the section mandates quarterly allotment plans rather than a document it calls a 'report', so the mapping to DORIS's title is an inference."
+    },
+    {
+      "key": "Taxi and Limousine Commission (TLC)||Report on the Number of Criminal & Civil Actions for Illegally Operating Non-TLC Licensed Vehicles for Hire (Commuter Vans)",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 19-506(m)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-204340",
+      "quote": "On or before February 1, 2013 and on a quarterly basis thereafter, the commission shall post on its website and provide to the council a report for the prior quarter",
+      "note": "Amended L.L. 2017/008 and L.L. 2019/041 — continued legislative maintenance, not lapse."
+    },
+    {
+      "key": "Human Resources Administration (HRA)||Cash assistance application and caseload engagement status reports for individuals aged 16 to 25",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-134(b)-(c) (L.L. 2012/051)",
+      "url": "https://intro.nyc/local-laws/2012-51",
+      "quote": "Beginning no later than April 1, 2013, and no later than the first day of each subsequent month, the department shall post on its website an updated report regarding the engagement status of heads of household between and including the ages of sixteen and twenty-four",
+      "note": "No sunset: LL 51/2012 closes with 'This local law shall take effect immediately.' Two corrections to DORIS's own metadata: subdivision (b) is MONTHLY (the semiannual duty is (c)), and the age range is 16 through 24, not 16 to 25."
+    },
+    {
+      "key": "Criminal Justice, Mayor's Office of (MOCJ)||Report of the Mayor's Office of Special Enforcement on Inspections of Nightlife Establishments",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 9-308 (L.L. 2019/220; Am. L.L. 2023/092)",
+      "url": "https://intro.nyc/local-laws/2019-220",
+      "quote": "Within one month after the calendar year quarter ending December 31, 2019, and within one month of each quarter thereafter, the office shall ensure that the office of special enforcement submits to the council and posts to its website, in a machine readable format, a report on inspections of nightlife establishments overseen by the office of special enforcement.",
+      "note": "DORIS's citation (§ 9-309) is wrong: that number is an unrelated district attorney reporting section added by L.L. 2021/161. LL 220/2019 as enacted said '§ 9-307', already taken by L.L. 2019/192, so the codifier placed it at § 9-308. Duty amended effective 1/5/2024 — affirmatively alive."
+    },
+    {
+      "key": "Transportation, Department of (DOT)||Accessible Water Borne Commuter Services Compliance Report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 19-711",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-137173",
+      "quote": "The department, the commission on human rights and operators of any water borne commuter services facility each shall provide the mayor and the city council with a semiannual report by January thirty-first and July first of each year setting forth information regarding compliance and non-compliance with this chapter at each water borne commuter services facility",
+      "note": "Fixed recurring dates each year; no sunset. Read via the BetaNYC mirror (amlegal 403)."
+    },
+    {
+      "key": "Cultural Affairs, Department of (DCLA)||Quarterly Equal Employment Opportunity and Diversity Plan Implementation",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Charter § 815(i)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-2480",
+      "quote": "The head of each city agency shall quarterly publish and submit to the mayor, council, department of citywide administrative services, and the equal employment practices commission a report on the agency's efforts during the previous quarter to implement the plan adopted pursuant to paragraph nineteen of subdivision a of section eight hundred fifteen.",
+      "note": "Section 815 amended repeatedly and recently (L.L. 2019/012, 2023/027, 2024/075, 2024/076) without touching subdivision (i). Applies to every city agency, so this reading governs all 422 requirements in the list citing Charter 815."
+    },
+    {
+      "key": "Immigrant Affairs, Mayor's Office of (MOIA)||Quarterly Equal Employment Opportunity and Diversity Plan Implementation",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Charter § 815(i)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-2480",
+      "quote": "The head of each city agency shall quarterly publish and submit to the mayor, council, department of citywide administrative services, and the equal employment practices commission a report on the agency's efforts during the previous quarter to implement the plan adopted pursuant to paragraph nineteen of subdivision a of section eight hundred fifteen.",
+      "note": "Same provision as the DCLA row above."
+    },
+    {
+      "key": "Economic Development Corporation (EDC)||Quarterly Expenditure Reports",
+      "verdict": "in_force",
+      "confidence": "medium",
+      "cite": "NYC Charter § 110",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-6756",
+      "quote": "Any public or private agency, authority, corporation, board or commission which receives city funds and is not otherwise subject to the requirements of section one hundred six of this chapter shall submit quarterly reports of the expenditure of such funds to the mayor in such form and detail as the mayor may prescribe.",
+      "note": "DORIS's citation (Charter § 119) does not exist — Chapter 6 runs § 100-111. The duty described is § 110, which is in force and covers EDC as a private corporation receiving city funds. Medium confidence because the intended provision is inferred from subject matter."
+    },
+    {
+      "key": "Finance, Department of (DOF)||Report on revocations",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 11-140 (L.L. 2017/193)",
+      "url": "https://intro.nyc/local-laws/2017-193",
+      "quote": "Not less than quarterly, the department of finance shall report to the speaker of the council and to the mayor a plan and a timeline for revocation of benefits under section 421-a of the real property tax law for each designated building for which such department received, during the reporting period, a final notice of revocation of such benefits",
+      "note": "DORIS's citation ('Title 11, Chapter 140') is really § 11-140. LL 193/2017's only timing clause is an effective date, not an expiration."
+    },
+    {
+      "key": "Health and Hospitals Corporation (H+H)||Report on Health Services in Correctional Facilities",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 17-199 (L.L. 2015/058)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-130234",
+      "quote": "The department shall submit to the mayor and the speaker of the council no later than July 15, 2015, and every three months thereafter, a report regarding the medical and mental health services provided to incarcerated individuals in city correctional facilities during the previous three calendar months",
+      "note": "Enactment note confirms LL 58/2015 created § 17-199 itself (not § 17-199.1). Only later change was a 2021 terminology amendment."
+    },
+    {
+      "key": "Buildings, Department of (DOB)||Report on Activities of the Office of the Tenant Advocate",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Charter § 650(b) (L.L. 2017/161)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-4650",
+      "quote": "The office of the tenant advocate shall submit to the mayor and the speaker of the city council, and publish on the department's website, quarterly reports related to the responsibilities of the office, including but not limited to:",
+      "note": "No amendment or repeal since enactment; the reporting subsection has never been narrowed."
+    },
+    {
+      "key": "Homeless Services, Department of (DHS)||Report on unsheltered homeless population",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-319 (L.L. 2017/217)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-37699",
+      "quote": "No later than September 1, 2018, and quarterly thereafter, the department shall submit to the speaker of the council and post online the total number of unsheltered homeless persons included in the record required pursuant to this subdivision, disaggregated to the extent available by the location where outreach staff first engaged the unsheltered homeless person.",
+      "note": "Open-ended. An editor's note shows amendment by L.L. 2026/099 effective 5/30/2028 — does not affect the current duty, but re-check before then."
+    },
+    {
+      "key": "Administrative Trials and Hearings, Office of (OATH)||Report on ECB Adjudications of Summonses Issued to Vendors",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 20-472.1(b) (L.L. 2013/016)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-135457",
+      "quote": "Commencing on June 1, 2013, and every three months thereafter, the environmental control board shall issue quarterly reports to the council with respect to violations that were issued pursuant to this subchapter or to subchapter two of chapter three of title seventeen of the administrative code, and that were adjudicated by the environmental control board.",
+      "note": "Duty falls on the Environmental Control Board, which sits within OATH — the tracker's agency attribution is right."
+    },
+    {
+      "key": "Correction, Department of (DOC)||Visitation Report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 9-140(b) (L.L. 2015/085; re-enacted L.L. 2025/044)",
+      "url": "https://intro.nyc/local-laws/2015-85",
+      "quote": "The commissioner shall post on the department website on a quarterly basis, within 30 days of the beginning of each quarter, a report containing information pertaining to the visitation of the incarcerated individual population in city jails for the prior quarter.",
+      "note": "Subdivision (b) was re-enacted by L.L. 2025/044 effective 1/6/2026 — the Council affirmatively kept the quarterly duty alive."
+    },
+    {
+      "key": "Protect Tenants, Mayor's Office to (MOPT)||Three-quarter Housing Task Force Report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 3-152(h) (L.L. 2019/189)",
+      "url": "https://intro.nyc/local-laws/2019-189",
+      "quote": "A city agency or office designated by the mayor shall provide to the speaker of the council and publish on its website quarterly reports on the state of three-quarter housing in the city. The first such report shall be due 30 days following the calendar quarter ending September 30, 2020, and all subsequent reports shall be due 30 days following the last day of each succeeding calendar quarter.",
+      "note": "LL 189/2019 has no sunset. The statute assigns the duty to 'a city agency or office designated by the mayor', not to MOPT by name, so MOPT's reorganization does not extinguish it — though the agency attribution on this row may be stale."
+    },
+    {
+      "key": "Human Resources Administration (HRA)||Report on arrests, summonses, removals, escorts and use of force incidents in job centers and Supplemental Nutrition Assistance Program (SNAP) centers",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-142.1(b) (L.L. 2019/161)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-113344",
+      "quote": "No later than January 31, 2020, and no later than 30 days after the end of each calendar quarter thereafter, the department shall post on its website and submit to the speaker of the council an aggregate report on arrests, summonses, removals, escorts and use of force incidents in job centers and SNAP centers for the preceding quarter.",
+      "note": "The Jan 2020 date is a start date. Subdivision (c) requires the reports be 'stored permanently', implying an ongoing series."
+    },
+    {
+      "key": "Taxi and Limousine Commission (TLC)||Report on Review of Vision Zero Crash Data Involving TLC-Licensed Vehicles Where Critical Injury or Death Occurs",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 19-540(b) (L.L. 2014/028)",
+      "url": "https://intro.nyc/local-laws/2014-28",
+      "quote": "On or before February 1, 2015 and quarterly thereafter, the commission shall provide to the speaker of the council and shall place on the commission's website, a written report detailing how many crashes the commission reviewed pursuant to subdivision a of this section in the prior quarter, how many summary suspensions occurred, and enforcement actions taken by the commission following such review.",
+      "note": "Codified text is verbatim identical to the 2014 enactment — the reporting subsection has never been amended away."
+    },
+    {
+      "key": "Health and Mental Hygiene, Department of (DOHMH)||Community Quality Air Survey",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 17-125(b)-(c) (L.L. 2015/103)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-27470",
+      "quote": "The department shall conduct a community air quality survey on an annual basis. ... Beginning April 22, 2016, and on or before April 22 annually thereafter, the department shall submit to the speaker of the council a report with the results of the annual community air quality survey for the most recently available year's analysis.",
+      "note": "Original enactment credit, no amendments or repeal. Expressly recurring."
+    },
+    {
+      "key": "Consumer and Worker Protection, Department of (DCWP)||Annual Report on Paid Care Industry",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 32-204 (L.L. 2016/098)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-111510",
+      "quote": "The division shall post on the division's website and submit to the speaker of the council, beginning no later than one year after the effective date of this law and annually thereafter, the following information for the preceding calendar year:",
+      "note": "No sunset. The surrounding chapter is live — § 32-202 amended as recently as L.L. 2020/080, so the Division of Paid Care remains an operating statutory body."
+    },
+    {
+      "key": "Taxi and Limousine Commission (TLC)||Crash Data Involving TLC-Licensed Vehicles",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 19-542 (L.L. 2014/031)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-32128",
+      "quote": "On or before February 1, 2015 and quarterly thereafter, the commission shall for the prior quarter provide a report to the council and shall post on its website, the number of crashes involving a vehicle licensed by the commission.",
+      "note": "No expiration. The parallel quarterly mandate in § 19-540(b) survives as well."
+    },
+    {
+      "key": "Human Resources Administration (HRA)||Emergency Feeding Programs Application Distribution Report",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 21-131(b) (L.L. 2005/080)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-37145",
+      "quote": "Beginning January 1, 2006, and on the first business day of each succeeding calendar quarter thereafter, the commissioner shall submit a report to the speaker of the city council indicating the emergency feeding programs to which it distributed applications in the prior calendar quarter and the number of applications distributed to each emergency feeding program.",
+      "note": "Open-ended, no sunset. Note there are two sections designated § 21-131; the food stamp one is the correct match and is intact."
+    },
+    {
+      "key": "Police Department (NYPD)||Report on Random Audits of Special Victims Division Case Management System",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 14-178(c) (L.L. 2018/192)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-25535",
+      "quote": "The department shall conduct quarterly random audits of the case management system to ensure the security of such system. Such audit shall include a review of all individuals outside of the special victims division who have accessed special victims division case files during the previous quarter. The department shall report the results of the audit to the council within 60 days of the end of each quarter.",
+      "note": "DORIS's citation (§ 14-177(c)) is wrong: § 14-177 is 'Harassment and sexual assault survivor sensitivity training' (L.L. 2018/189) and has no subsection (c) and no reporting duty. LL 192/2018 added § 14-178. No sunset — the enacted law's only closing provision is an effective date."
+    },
+    {
+      "key": "Economic Development Corporation (EDC)||Report on Lobbying Activities by the Economic Development Corporation",
+      "verdict": "in_force",
+      "confidence": "high",
+      "cite": "NYC Admin. Code § 22-802 (L.L. 2013/102; Am. L.L. 2017/222)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-203630",
+      "quote": "The first such submission shall be provided no later than December 31, 2013 and shall cover the period from November 1, 2012 through November 30, 2013. All reports shall be filed thereafter within thirty days after the end of each quarter and simultaneously made available in a commonly available non-proprietary database format on the website of the contracted entity",
+      "note": "LL 222/2017 did not curtail the duty — it merely redesignated §§ 22-801 and 22-802 into a new subchapter 1; its repeals target Charter § 1301(1)(b) and (b-1). No expiration."
+    },
+    {
+      "key": "Environmental Protection, Department of (DEP)||Quarterly Report on Combined Sewer Outfalls",
+      "verdict": "uncertain",
+      "confidence": "medium",
+      "cite": "NYC Admin. Code § 24-504.2(a)(6)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-224862",
+      "quote": "The department shall, within eight months of the effective date of this section, complete an analysis of the combined sewer outfall system and its relationship to floatables, including medical debris ... This analysis shall include, but not be limited to, identifying, evaluating and providing: ... 6. A quarterly report about the status of this debris, as evidenced by the city-wide floatables study",
+      "note": "Not repealed and no sunset — and the code flags repeals explicitly (adjacent § 24-504.1 is marked '[Repealed]'), so it did not silently lapse. But the quarterly report is item 6 in an enumerated list of what a ONE-TIME analysis 'shall include', not a freestanding perpetual duty. The text cannot resolve whether the quarterly cadence survives completion of that study. Two independent reviewers reached this same conclusion."
+    },
+    {
+      "key": "Environmental Protection, Department of (DEP)||Combined sewer overflow and floatables, including medical debris, study",
+      "verdict": "uncertain",
+      "confidence": "medium",
+      "cite": "NYC Admin. Code § 24-504.2(a)(6)",
+      "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-224862",
+      "quote": "The department shall, within eight months of the effective date of this section, complete an analysis of the combined sewer outfall system and its relationship to floatables, including medical debris ... This analysis shall include, but not be limited to, identifying, evaluating and providing: ... 6. A quarterly report about the status of this debris, as evidenced by the city-wide floatables study",
+      "note": "Same provision as the row above. Additionally, DORIS attributes this row to the 'CSO Order on Consent' — a state DEC consent order, not a local-law reporting mandate. Any ongoing quarterly CSO obligation would arise from that order, which is outside what the code text can resolve."
+    }
+  ]
+}
