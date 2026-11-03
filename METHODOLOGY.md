@@ -22,7 +22,7 @@ DORIS tags each filed document with the required report it satisfies (`required_
 The folding is not cosmetic. A literal string join produces false overdue statuses, because DORIS enters the same requirement inconsistently:
 
 - **Report name casing.** The list carries `Report on freelance law` (last published 2018-05-15) and `Report on Freelance Law` (last published 2023-11-08) as separate rows under the same agency and the same authorizing law (LL 140/2016, Admin. Code § 936(c)). Keyed literally, the lowercase row is stranded with the 2018 date and computes as ~1,150 days overdue, while the same report shows as current one row away. Verified July 2026: five such pairs exist across the list; folding case and punctuation merges exactly those five and no others.
-- **Agency acronyms.** The requirements list says `Health and Hospitals Corporation (H+H)`; 72 filings arrive under `Health and Hospitals Corporation (HHC)`. We key agencies on the long name with the trailing parenthetical stripped. Verified July 2026: this merges exactly one pair (H+H/HHC) and collides no genuinely distinct agencies. Keying on the acronym instead does *not* merge them.
+- **Agency acronyms.** The requirements list says `Health and Hospitals Corporation (H+H)`; 72 filings arrive under `Health and Hospitals Corporation (HHC)`. We key agencies on the long name with the trailing parenthetical stripped. Checked July 2026: this merges exactly one pair (H+H/HHC) and collides no distinct agencies. Keying on the acronym instead does *not* merge them.
 
 Where the same requirement appears as multiple rows (the underlying law changed over time, e.g. "Required report from Jan 2020 - July 2020"), we group rows by the folded agency + name, prefer the row whose description does not describe a closed era, and among those take the one with the latest last-published date. That row's own spelling is what the site displays. The row count per requirement is retained (`versions`), and "last filed" is taken across every row in the group, not just the chosen one.
 
@@ -53,7 +53,7 @@ This is detection from unstructured text, not a structured field, and it is ther
 
 ### Ambiguous date ranges — and what reading the laws showed
 
-59 overdue requirements carry an annotation like "(Required Reports from Jan 2020 to Nov 2020)" or "(Reports up to Jul 2020)". On its face this is ambiguous: it may mean the requirement lapsed at the end of that window, or that the agency simply stopped filing a report it still owes. DORIS does not distinguish the two, and nothing in either dataset answers it — only the authorizing statute does.
+59 overdue requirements carry an annotation like "(Required Reports from Jan 2020 to Nov 2020)" or "(Reports up to Jul 2020)". On its face this is ambiguous: it may mean the requirement lapsed at the end of that window, or that the agency stopped filing a report it still owes. DORIS does not distinguish the two, and nothing in either dataset answers it — only the authorizing statute does.
 
 So we read the current text of the cited section for **all 59**. The results are recorded in `law_review.json`, one entry per requirement, each with the citation, a verbatim quote of the operative language and a link:
 
@@ -61,7 +61,7 @@ So we read the current text of the cited section for **all 59**. The results are
 - **5 had been repealed.** See below.
 - **2 could not be resolved** — both DEP rows resting on Admin. Code § 24-504.2(a)(6), where the quarterly report is item 6 in an enumerated list of what a *one-time* analysis "shall include" rather than a freestanding perpetual duty. The section is not repealed (and the code flags repeals explicitly — adjacent § 24-504.1 is marked "[Repealed]"), so it did not silently lapse; the text simply does not say whether the cadence survives the study. Two independent reviewers reached the same conclusion. These keep the caveat.
 
-**Mostly the era annotation describes DORIS's holdings, not the scope of the legal duty — but not always.** A data-only test pointed that way without settling it: in 15 of 26 testable cases the annotation's end date matched the last filing DORIS holds, consistent with "these are the reports we have," but in 11 it extended past the last filing. And in at least one case (FDNY, below) the annotation was reporting a real sunset. Only the statutes distinguish the two.
+**The era annotation usually describes DORIS's holdings and sometimes the scope of the legal duty.** A data-only test pointed that way without settling it: in 15 of 26 testable cases the annotation's end date matched the last filing DORIS holds, consistent with "these are the reports we have," but in 11 it extended past the last filing. And in at least one case (FDNY, below) the annotation was reporting a real sunset. Only the statutes distinguish the two.
 
 Requirements with a reading attached carry a `law_review` object and are labeled "Still required" on the site with the section text shown. `build.py` warns at build time if a review's key no longer matches any requirement, so the file cannot rot silently when DORIS renames a row.
 
@@ -82,7 +82,7 @@ Five were found by reading the ambiguous entries; three more by the Local Law 69
 
 Two deserve elaboration.
 
-**The FDNY report is the one the code page cannot tell you about.** Admin. Code § 15-133(b) still prints in the current code reading "Beginning January 31, 2019 and annually thereafter…" — it looks perfectly live. The self-repealer sits in the enacting law's *unconsolidated provisions*, not the running text: LL 2018/116 § 2 provides that subdivision (b) "is deemed repealed 5 years after it becomes law." The clerk certifies the law was returned unsigned on June 12, 2018, so the duty died June 12, 2023. The only clue on the code page is an editor's note pointing to Appendix A. DORIS's era note here ("Reports from Nov 2020 to Jan 2023") was accurate — the January 2023 filing was the last one ever owed.
+**The code page does not show that the FDNY requirement was repealed.** Admin. Code § 15-133(b) still prints in the current code reading "Beginning January 31, 2019 and annually thereafter…", so it looks current. The self-repealer sits in the enacting law's *unconsolidated provisions*, not the running text: LL 2018/116 § 2 provides that subdivision (b) "is deemed repealed 5 years after it becomes law." The clerk certifies the law was returned unsigned on June 12, 2018, so the duty died June 12, 2023. The only clue on the code page is an editor's note pointing to Appendix A. DORIS's era note here ("Reports from Nov 2020 to Jan 2023") was accurate — the January 2023 filing was the last one ever owed.
 
 **The Algorithms Officer report never rested on a statute at all.** It came from Executive Order 50 of 2019, which Executive Order 3 of 2022 both discontinued (§ 4) and revoked outright (§ 10) — the same order that folded DOITT, MODA and MOIP into OTI. No local law preserves it, and the residual function went to OTI, so the attribution to the Mayor's Office of Operations is wrong even as to the successor.
 
@@ -114,7 +114,7 @@ Four labels or frequencies are also wrong: HRA's "reports for individuals aged 1
 
 #### Cases where the report exists but DORIS has no copy
 
-CCRB's Administrative Prosecution Unit reports (2,267 days late, now the most overdue entry in the tracker) rest not on a statute but on paragraph 18 of the 2012 CCRB–NYPD memorandum of understanding, which requires quarterly status reports to the NYPD. The MOU is still presented as operative, and **CCRB has published APU quarterly reports through 2026 Q1** — they are simply not filed with DORIS. This is limitation 2 above in its purest form: the red badge is accurate about the city's recordkeeping and misleading about the underlying work. Note also that the duty runs to the NYPD rather than to the public, and paragraph 29 lets either party terminate on written notice, so it is legally weaker than the statutory duties around it.
+CCRB's Administrative Prosecution Unit reports (2,267 days late, now the most overdue entry in the tracker) rest not on a statute but on paragraph 18 of the 2012 CCRB–NYPD memorandum of understanding, which requires quarterly status reports to the NYPD. The MOU is still presented as operative, and **CCRB has published APU quarterly reports through 2026 Q1** — they are not filed with DORIS. This is limitation 2 above: the red badge is accurate about the city's recordkeeping and misleading about the underlying work. Note also that the duty runs to the NYPD rather than to the public, and paragraph 29 lets either party terminate on written notice, so it is legally weaker than the statutory duties around it.
 
 Two others fit the pattern. ACS has continued publishing its annual child fatality reviews — the 2022 and 2023 editions cite § 21-915 by name — despite the tracker showing the requirement 1,477 days late. And DEP's clean heating oil waiver report may be satisfied through the Mayor's Management Report under § 24-168.1(d)(2), which would explain its sparse DORIS record.
 
@@ -141,7 +141,7 @@ DORIS knows each report's actual statutory due date (an annual report might be d
 5. **Frequency intervals are approximations.** "Every 1 Year" = 365.25 days from the last filing, not the statutory due date.
 8. **Supersession is detected from free text, not a field.** The `superseded` status relies on DORIS having written a note in the description. A requirement that quietly lapsed, or whose successor agency is named only in the underlying law, still shows as overdue.
 9. **Future-dated filings are discarded, which can overstate lateness.** Both datasets contain obvious data-entry errors (dates in 2028, or "2026-12-31"). We ignore any date after the build date. Where such an entry is a typo for a real recent filing, the requirement will read staler than it is. Three overdue rows were affected in the July 2026 build.
-6. **Blank frequencies.** 231 requirement rows have no stated frequency; where a filing exists we mark them "no schedule" rather than guessing.
+6. **Blank frequencies.** 231 requirement rows have no stated frequency; where a filing exists we mark them "no schedule."
 7. **Coverage of non-mayoral entities** (district attorneys, Board of Elections, etc.) is thin and should not be treated as exhaustive.
 
 ## Reproducing this

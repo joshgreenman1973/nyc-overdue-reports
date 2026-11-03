@@ -15,7 +15,7 @@
       "cite": "CCRB-NYPD Administrative Prosecution Unit MOU (agreed 4/2/2012), para. 18",
       "url": "https://www.nyc.gov/assets/ccrb/downloads/pdf/about_pdf/apu_mou.pdf",
       "quote": "CCRB shall provide to the NYPD status reports on the prosecution of its cases, quarterly and as otherwise requested by the NYPD.",
-      "note": "Not a statute. Paragraph 18 is an open-ended quarterly duty, but para. 29 lets either party terminate on written notice, and a termination would not necessarily be public — hence medium confidence. CCRB still presents the 2012 MOU as operative and is publishing APU quarterly reports through 2026 Q1, so the report exists; it is simply not being filed with DORIS."
+      "note": "Not a statute. Paragraph 18 is an open-ended quarterly duty, but para. 29 lets either party terminate on written notice, and a termination would not necessarily be public — hence medium confidence. CCRB still presents the 2012 MOU as operative and is publishing APU quarterly reports through 2026 Q1, so the report exists; it is not being filed with DORIS."
     },
     {
       "key": "Environmental Protection, Department of (DEP)||Maintenance, Costs and Expenses",
@@ -105,7 +105,7 @@
       "cite": "NYC Admin. Code § 9-308 (L.L. 2019/220; Am. L.L. 2023/092)",
       "url": "https://intro.nyc/local-laws/2019-220",
       "quote": "Within one month after the calendar year quarter ending December 31, 2019, and within one month of each quarter thereafter, the office shall ensure that the office of special enforcement submits to the council and posts to its website, in a machine readable format, a report on inspections of nightlife establishments overseen by the office of special enforcement.",
-      "note": "DORIS's citation (§ 9-309) is wrong: that number is an unrelated district attorney reporting section added by L.L. 2021/161. LL 220/2019 as enacted said '§ 9-307', already taken by L.L. 2019/192, so the codifier placed it at § 9-308. Duty amended effective 1/5/2024 — affirmatively alive."
+      "note": "DORIS's citation (§ 9-309) is wrong: that number is an unrelated district attorney reporting section added by L.L. 2021/161. LL 220/2019 as enacted said '§ 9-307', already taken by L.L. 2019/192, so the codifier placed it at § 9-308. Duty amended effective 1/5/2024, so it is in force."
     },
     {
       "key": "Transportation, Department of (DOT)||Accessible Water Borne Commuter Services Compliance Report",
@@ -150,7 +150,7 @@
       "cite": "NYC Admin. Code § 11-140 (L.L. 2017/193)",
       "url": "https://intro.nyc/local-laws/2017-193",
       "quote": "Not less than quarterly, the department of finance shall report to the speaker of the council and to the mayor a plan and a timeline for revocation of benefits under section 421-a of the real property tax law for each designated building for which such department received, during the reporting period, a final notice of revocation of such benefits",
-      "note": "DORIS's citation ('Title 11, Chapter 140') is really § 11-140. LL 193/2017's only timing clause is an effective date, not an expiration."
+      "note": "DORIS's citation ('Title 11, Chapter 140') is § 11-140. LL 193/2017's only timing clause is an effective date, not an expiration."
     },
     {
       "key": "Health and Hospitals Corporation (H+H)||Report on Health Services in Correctional Facilities",
@@ -276,7 +276,7 @@
       "cite": "NYC Admin. Code § 22-802 (L.L. 2013/102; Am. L.L. 2017/222)",
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-203630",
       "quote": "The first such submission shall be provided no later than December 31, 2013 and shall cover the period from November 1, 2012 through November 30, 2013. All reports shall be filed thereafter within thirty days after the end of each quarter and simultaneously made available in a commonly available non-proprietary database format on the website of the contracted entity",
-      "note": "LL 222/2017 did not curtail the duty — it merely redesignated §§ 22-801 and 22-802 into a new subchapter 1; its repeals target Charter § 1301(1)(b) and (b-1). No expiration."
+      "note": "LL 222/2017 did not curtail the duty; it redesignated §§ 22-801 and 22-802 into a new subchapter 1; its repeals target Charter § 1301(1)(b) and (b-1). No expiration."
     },
     {
       "key": "Environmental Protection, Department of (DEP)||Quarterly Report on Combined Sewer Outfalls",
@@ -285,7 +285,7 @@
       "cite": "NYC Admin. Code § 24-504.2(a)(6)",
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-224862",
       "quote": "The department shall, within eight months of the effective date of this section, complete an analysis of the combined sewer outfall system and its relationship to floatables, including medical debris ... This analysis shall include, but not be limited to, identifying, evaluating and providing: ... 6. A quarterly report about the status of this debris, as evidenced by the city-wide floatables study",
-      "note": "Not repealed and no sunset — and the code flags repeals explicitly (adjacent § 24-504.1 is marked '[Repealed]'), so it did not silently lapse. But the quarterly report is item 6 in an enumerated list of what a ONE-TIME analysis 'shall include', not a freestanding perpetual duty. The text cannot resolve whether the quarterly cadence survives completion of that study. Two independent reviewers reached this same conclusion."
+      "note": "Not repealed and no sunset — and the code flags repeals explicitly (adjacent § 24-504.1 is marked '[Repealed]'), so it did not silently lapse. But the quarterly report is item 6 in an enumerated list of what a one-time analysis 'shall include', not a freestanding perpetual duty. The text cannot resolve whether the quarterly cadence survives completion of that study. Two independent reviewers reached this same conclusion."
     },
     {
       "key": "Environmental Protection, Department of (DEP)||Combined sewer overflow and floatables, including medical debris, study",
@@ -357,7 +357,7 @@
       "cite": "NYC Charter § 312(a)(8)(b) (L.L. 2011/063; Am. L.L. 2024/085, eff. 10/1/2024)",
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-5331",
       "quote": "The mayor shall, no later than July 31st of each year, produce and publish on the mayor's office of contract services website a plan and schedule for each agency detailing the anticipated contracting actions of each such agency for the upcoming fiscal year.",
-      "note": "Affirmatively expanded by LL 2024/085 — decisive evidence it is live."
+      "note": "Expanded by LL 2024/085, so it is in force."
     },
     {
       "key": "Human Resources Administration (HRA)||Cash assistance application and caseload engagement status reports for individuals aged 16 to 20",
@@ -384,7 +384,7 @@
       "cite": "NYC Admin. Code § 21-905 (Am. L.L. 2024/112, eff. 1/1/2025)",
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-205403",
       "quote": "By January 15, 2025, and no later than 90 days after the end of each quarter thereafter, ACS shall submit a report about the demographics of juveniles in the juvenile justice system to the speaker of the council and post such report on ACS's website.",
-      "note": "Two DORIS errors: the section has lettered subdivisions a-g, not paragraphs (1)/(2); and the FREQUENCY is wrong — this is quarterly, not annual, since LL 2024/112 re-based it to Jan 2025. The annual compilation duty sits in § 21-903."
+      "note": "Two DORIS errors: the section has lettered subdivisions a-g, not paragraphs (1)/(2); and the frequency is wrong — this is quarterly, not annual, since LL 2024/112 re-based it to Jan 2025. The annual compilation duty sits in § 21-903."
     },
     {
       "key": "Police Department (NYPD)||Patrol Guide Procedures Quarterly Report",
@@ -411,7 +411,7 @@
       "cite": "NYC Admin. Code § 3-181 (L.L. 2019/038; Am. L.L. 2021/109)",
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-201830",
       "quote": "On June 1, 2019, and no later than January 31 annually thereafter, the office shall submit to the mayor and speaker of the council and post on its website an annual report regarding certain domestic violence initiatives, indicators, and factors.",
-      "note": "DORIS's citation (§ 3-171(b)(1)) is WRONG — § 3-171 is 'Pay and employment equity data' and has nothing to do with domestic violence. The provision enacted by LL 38/2019 is § 3-181."
+      "note": "DORIS's citation (§ 3-171(b)(1)) is wrong: § 3-171 is 'Pay and employment equity data' and has nothing to do with domestic violence. The provision enacted by LL 38/2019 is § 3-181."
     },
     {
       "key": "Records and Information Services, Department of (DORIS)||Bulletin on activities (Library Notes)",
@@ -420,7 +420,7 @@
       "cite": "NYC Charter § 3004(3)(a) (Am. L.L. 2025/041, eff. 8/9/2025)",
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-6582",
       "quote": "provide for the distribution of publications of the city, where such authority is not vested in another city agency, and issue at regular intervals, no less than quarterly, a bulletin describing its facilities and resources;",
-      "note": "Standing duty at a fixed minimum cadence. Section amended Aug 2025 — demonstrably live."
+      "note": "Standing duty at a fixed minimum cadence. Section amended Aug 2025, so it is in force."
     },
     {
       "key": "Environmental Protection, Department of (DEP)||Commissioner report on all waivers, findings, and renewals relating to clean heating oil and biodiesel",
@@ -447,7 +447,7 @@
       "cite": "NYC Admin. Code § 9-149(d) (L.L. 2017/124)",
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-5664",
       "quote": "Beginning July 1, 2018, the department or its designee shall submit to the council an annual report regarding the implementation of subdivisions a and b of this section.",
-      "note": "DORIS's attribution to 'LL 85 of 2015 (Int. 706)' is WRONG — that law is codified at § 9-140 and covers jail visitation, not bail. The duty comes from LL 124/2017. Medium confidence: LL 124/2017 carries a CONDITIONAL sunset that only triggers once the correction commissioner notifies the Council; no such notice was found, and amlegal still prints subd. (d) unmarked, with a state amendment dated 8/8/2022 postdating the trigger date."
+      "note": "DORIS's attribution to 'LL 85 of 2015 (Int. 706)' is wrong: that law is codified at § 9-140 and covers jail visitation, not bail. The duty comes from LL 124/2017. Medium confidence: LL 124/2017 carries a conditional sunset that only triggers once the correction commissioner notifies the Council; no such notice was found, and amlegal still prints subd. (d) unmarked, with a state amendment dated 8/8/2022 postdating the trigger date."
     },
     {
       "key": "Immigrant Affairs, Mayor's Office of (MOIA)||Report on Agency Policies on Identifying Information",
@@ -474,7 +474,7 @@
       "cite": "NYC Admin. Code § 3-120(a) (L.L. 2011/052; Am. L.L. 2021/059) and NYC Charter § 20(j)",
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCadmin/0-0-0-432",
       "quote": "No later than September first, two thousand twelve, and no later than every September first thereafter, the office of long-term planning and sustainability shall prepare and submit to the mayor and the speaker of the city council a report regarding the production, processing, distribution and consumption of food in and for the city of New York during the previous fiscal year.",
-      "note": "LL 2021/059 EXPANDED the report (adding SNAP gap, food-insecurity and dietary-outcome measures) rather than winding it down. Attribution caveat: § 3-120 places the duty on the office of long-term planning and sustainability, though MOFP publishes it in practice."
+      "note": "LL 2021/059 expanded the report (adding SNAP gap, food-insecurity and dietary-outcome measures) rather than winding it down. Attribution caveat: § 3-120 places the duty on the office of long-term planning and sustainability, though MOFP publishes it in practice."
     },
     {
       "key": "Records and Information Services, Department of (DORIS)||Municipal Archives Annual Report (contained within the Archival Review Board annual report)",
@@ -483,7 +483,7 @@
       "cite": "NYC Charter § 3005",
       "url": "https://codelibrary.amlegal.com/codes/newyorkcity/latest/NYCcharter/0-0-0-6585",
       "quote": "Such board shall render annually to the mayor a report reviewing the archival processing of any city papers during the year for which the report has been written.",
-      "note": "L.L. 2026/077 (eff. 8/7/2026) renames the body and RE-ENACTS the annual report as a new subdivision e ('No later than December 31, 2026, and annually by December 31 thereafter'). The report survives the reorganization — the law repeals § 3009, not this duty."
+      "note": "L.L. 2026/077 (eff. 8/7/2026) renames the body and re-enacts the annual report as a new subdivision e ('No later than December 31, 2026, and annually by December 31 thereafter'). The report survives the reorganization — the law repeals § 3009, not this duty."
     },
     {
       "key": "Fire Department, New York City (FDNY)||Report on Recruitment Efforts",
@@ -510,7 +510,7 @@
       "cite": "NYC Admin. Code § 15-133(b) — DEEMED REPEALED June 12, 2023 by L.L. 2018/116 § 2",
       "url": "https://intro.nyc/local-laws/2018-116",
       "quote": "Subdivision b of section 15-133 of the administrative code of the city of New York, as added by section one of this local law, is deemed repealed 5 years after it becomes law.",
-      "note": "THE SUBTLE ONE. amlegal's running text still prints subdivision (b) as if live ('Beginning January 31, 2019 and annually thereafter') because the self-repealer lives in the law's unconsolidated provisions, not the code page — only the editor's note pointing to Appendix A hints at it. The clerk certifies the law was 'returned unsigned by the Mayor on June 12, 2018', so (b) died June 12, 2023. DORIS's era note ('Reports from Nov 2020 to Jan 2023') is accurate: the Jan 2023 filing was the last one ever owed. Subdivision (a), the duty to run the education program, survives."
+      "note": "amlegal's running text still prints subdivision (b) as if live ('Beginning January 31, 2019 and annually thereafter') because the self-repealer lives in the law's unconsolidated provisions, not the code page — only the editor's note pointing to Appendix A hints at it. The clerk certifies the law was 'returned unsigned by the Mayor on June 12, 2018', so (b) died June 12, 2023. DORIS's era note ('Reports from Nov 2020 to Jan 2023') is accurate: the Jan 2023 filing was the last one ever owed. Subdivision (a), the duty to run the education program, survives."
     },
     {
       "key": "City Planning, Department of (DCP)||Zoning and Planning Report",
